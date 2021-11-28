@@ -50,8 +50,8 @@ function SignIn() {
     setButtonText("Signing in");
     try {
       let response = await AuthApi.Login({
-        email,
-        password,
+        "username":email,
+        "password":password,
       });
       if (response.data && response.data.success === false) {
         setButtonText("Sign in");

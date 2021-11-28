@@ -91,7 +91,7 @@ function Billing() {
                   <Flex direction="column">
                     <Box>
                       <Text fontSize="xl" letterSpacing="2px" fontWeight="bold">
-                        7812 2139 0823 XXXX
+                        7777 7777 7777 7777
                       </Text>
                     </Box>
                     <Flex mt="14px">
