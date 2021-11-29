@@ -23,8 +23,12 @@ import TransactionRow from "components/Tables/TransactionRow";
 import { Separator } from "components/Separator/Separator";
 import React from "react";
 import {
+  FaBuyNLarge,
+  FaCoins,
+  FaDollarSign,
   FaPaypal,
   FaPencilAlt,
+  FaPlus,
   FaRegCalendarAlt,
   FaWallet,
 } from "react-icons/fa";
@@ -68,7 +72,7 @@ function Billing() {
               h={{ sm: "220px", xl: "100%" }}
               gridArea={{ md: "1 / 1 / 2 / 3", xl: "1 / 1 / 2 / 3" }}
             >
-              <CardBody  h="100%" w="100%">
+              <CardBody h="100%" w="100%">
                 <Flex
                   direction="column"
                   color="white"
@@ -78,7 +82,7 @@ function Billing() {
                 >
                   <Flex justify="space-between" align="center">
                     <Text fontSize="md" fontWeight="bold">
-                      Purity UI
+                      Name Surname
                     </Text>
                     <Icon
                       as={RiMastercardFill}
@@ -91,7 +95,7 @@ function Billing() {
                   <Flex direction="column">
                     <Box>
                       <Text fontSize="xl" letterSpacing="2px" fontWeight="bold">
-                        7777 7777 7777 7777
+                        example@gmail.com
                       </Text>
                     </Box>
                     <Flex mt="14px">
@@ -165,7 +169,7 @@ function Billing() {
                   py="14px"
                 >
                   <IconBox as="box" h={"60px"} w={"60px"} bg={iconTeal}>
-                    <Icon h={"24px"} w={"24px"} color="white" as={FaPaypal} />
+                    <Icon h={"24px"} w={"24px"} color="white" as={FaCoins} />
                   </IconBox>
                   <Flex
                     direction="column"
@@ -176,7 +180,7 @@ function Billing() {
                     w="100%"
                   >
                     <Text fontSize="md" color={textColor} fontWeight="bold">
-                      Paypal
+                      Balance
                     </Text>
                     <Text
                       mb="24px"
@@ -184,33 +188,28 @@ function Billing() {
                       color="gray.400"
                       fontWeight="semibold"
                     >
-                      Freelance Payment
+                      Freelance
                     </Text>
                     <Separator />
                   </Flex>
-                  <Text fontSize="lg" color={textColor} fontWeight="bold">
-                    $455.00
-                  </Text>
+                  <Button
+                    p="0px"
+                    bg="transparent"
+                    w="16px"
+                    h="16px"
+                    variant="no-hover"
+                    bgColor=""
+                  >
+                    <Text color="#799778">Add Balance</Text>
+                    <Icon paddingLeft="2" color="#799778" as={FaPlus} />
+
+                  </Button>
                 </Flex>
               </CardBody>
             </Card>
           </Grid>
           <Card p="16px" mt="24px">
-            <CardHeader>
-              <Flex justify="space-between" align="center" minHeight="60px" w="100%">
-                <Text fontSize="lg" color={textColor} fontWeight="bold">
-                  Payment Method
-                </Text>
-                <Button
-                  bg={bgButton}
-                  color="white"
-                  fontSize="xs"
-                  variant="no-hover"
-                >
-                  ADD NEW CARD
-                </Button>
-              </Flex>
-            </CardHeader>
+
             <CardBody>
               <Flex
                 direction={{ sm: "column", md: "row" }}
@@ -317,7 +316,7 @@ function Billing() {
         </Card>
       </Grid>
       <Grid templateColumns={{ sm: "1fr", lg: "1.6fr 1.2fr" }}>
-        <Card my={{ lg: "24px" }} me={{ lg: "24px" }}>
+        {/* <Card my={{ lg: "24px" }} me={{ lg: "24px" }}>
           <Flex direction="column">
             <CardHeader py="12px">
               <Text color={textColor} fontSize="lg" fontWeight="bold">
@@ -339,8 +338,8 @@ function Billing() {
               </Flex>
             </CardBody>
           </Flex>
-        </Card>
-        <Card  my="24px" ms={{ lg: "24px" }}>
+        </Card> */}
+        <Card my="24px" ms={{ lg: "24px" }}>
           <CardHeader mb="12px">
             <Flex direction="column" w="100%">
               <Flex
@@ -373,42 +372,42 @@ function Billing() {
           </CardHeader>
           <CardBody>
             <Flex direction="column" w="100%">
-                <Text
-                  color="gray.400"
-                  fontSize={{ sm: "sm", md: "md" }}
-                  fontWeight="semibold"
-                  my="12px"
-                >
-                  NEWEST
-                </Text>
-                {newestTransactions.map((row) => {
-                  return (
-                    <TransactionRow
-                      name={row.name}
-                      logo={row.logo}
-                      date={row.date}
-                      price={row.price}
-                    />
-                  );
-                })}
-                <Text
-                  color="gray.400"
-                  fontSize={{ sm: "sm", md: "md" }}
-                  fontWeight="semibold"
-                  my="12px"
-                >
-                  OLDER
-                </Text>
-                {olderTransactions.map((row) => {
-                  return (
-                    <TransactionRow
-                      name={row.name}
-                      logo={row.logo}
-                      date={row.date}
-                      price={row.price}
-                    />
-                  );
-                })}
+              <Text
+                color="gray.400"
+                fontSize={{ sm: "sm", md: "md" }}
+                fontWeight="semibold"
+                my="12px"
+              >
+                NEWEST
+              </Text>
+              {newestTransactions.map((row) => {
+                return (
+                  <TransactionRow
+                    name={row.name}
+                    logo={row.logo}
+                    date={row.date}
+                    price={row.price}
+                  />
+                );
+              })}
+              <Text
+                color="gray.400"
+                fontSize={{ sm: "sm", md: "md" }}
+                fontWeight="semibold"
+                my="12px"
+              >
+                OLDER
+              </Text>
+              {olderTransactions.map((row) => {
+                return (
+                  <TransactionRow
+                    name={row.name}
+                    logo={row.logo}
+                    date={row.date}
+                    price={row.price}
+                  />
+                );
+              })}
             </Flex>
           </CardBody>
         </Card>
