@@ -4770,6 +4770,18 @@ body.date-20180212.exp-invert-logo {
     margin: 0 auto;
 }
 
+.video-area .videos-heding .videos-box .video-js .vjs-big-play-button:before {
+    content: '';
+    position: absolute;
+    height: 125px;
+    width: 50px;
+    line-height: 125px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
 .video-area .videos-heding .videos-box .vjs-icon-play:before {
     display: none;
 }

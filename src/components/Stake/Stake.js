@@ -10,11 +10,9 @@ import {
     useColorMode,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { Row, Col } from 'reactstrap';
-import "./stake.css"
-import "bootstrap/dist/css/bootstrap.min.css";
-// assets
-// Custom components
+import { Row, Col, Container } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactWOW from 'react-wow';
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import IconBox from "components/Icons/IconBox";
@@ -26,9 +24,12 @@ import {
     WalletIcon,
 } from "components/Icons/Icons.js";
 import React, { useState } from "react";
-// react icons
+import './css/style.css';
 
-export default function Dashboard() {
+
+
+
+export default function Dashboard(props) {
     const value = "$100.000";
     // Chakra Color Mode
     const { colorMode, toggleColorMode } = useColorMode();
@@ -47,9 +48,60 @@ export default function Dashboard() {
             data: [400, 291, 121, 117, 25, 133, 121, 211, 147, 25, 201, 203],
         },
     ]);
-    const overlayRef = React.useRef();
 
-    return (
+    const overlayRef = React.useRef();
+    
+    //
+    let contents = (
+        <Row>
+         
+          <Col lg={10} md={9} sm={12} >
+            
+            <Col lg={6} md={6} sm={6}>
+              <div className="tokens mr-r50">
+                <div className="token-name">ICO</div>
+                <div className="token-body">
+                  <p>Target – to Raise USD 20,000,000</p>
+                  <button className="right-btn">Price 1 BIT - $1.00</button>
+                  <div className="prices">
+                    <h3 className="f-20">Bonus for ICO :</h3>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Time</th>
+                          <th>bonus</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1day</td>
+                          <td>35%</td>
+                        </tr>
+                        <tr>
+                          <td>2 - 4 Days </td>
+                          <td>20%</td>
+                        </tr>
+                        <tr>
+                          <td>5 - 13 Days</td>
+                          <td>10%</td>
+                        </tr>
+                        <tr>
+                          <td>14 - 31 Day</td>
+                          <td>0%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Col>
+        </Row>
+      )
+      
+    //
+
+    return (<>
         <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
             <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
                 <Card minH="83px">
@@ -194,68 +246,18 @@ export default function Dashboard() {
                     </CardBody>
                 </Card>
             </SimpleGrid>
-            <Row>
-                <Col lg={12} md={12} sm={12} className="col-xs-12">
-                    <div className="section-heading2">
-                        <h2>Rounds of Sale of Tokens</h2>
-                    </div>
-                </Col>
-                <Col lg={10} md={9} sm={12} className="col-xs-12 col-lg-offset-1 col-md-offset-1">
-                    <Col lg={6} md={6} sm={6} className="col-xs-12 text-right">
-                        <div className="tokens mr-l50">
-                            <div className="token-name">Pre-sale</div>
-                            <div className="token-body">
-                                <p>Target – to Raise USD 500,000</p>
-                                <button className="left-btn">Price 1 BIT – $0.25</button>
-                                <span className="easypiechart skill-circle">
-                                    <span className="percent head-font">20</span>
-                                    <br />
-                                    <span className="con">Special Bonus</span>
-                                </span>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col lg={6} md={6} sm={6} className="col-xs-12 text-right">
-                        <div className="tokens mr-r50">
-                            <div className="token-name">ICO</div>
-                            <div className="token-body">
-                                <p>Target – to Raise USD 20,000,000</p>
-                                <button className="right-btn">Price 1 BIT - $1.00</button>
-                                <div className="prices">
-                                    <h3 className="f-20">Bonus for ICO :</h3>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Time</th>
-                                                <th>bonus</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1day</td>
-                                                <td>35%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2 - 4 Days </td>
-                                                <td>20%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5 - 13 Days</td>
-                                                <td>10%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14 - 31 Day</td>
-                                                <td>0%</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </Col>
-                   
-                </Col>
-            </Row>
+
         </Flex>
+        
+        <div id="tokens" className="wd_scroll">
+        <section className="tokens-area section">
+          <Container>
+            {contents}
+          </Container>
+        </section>
+      </div>
+        
+
+    </>
     );
 }
