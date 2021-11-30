@@ -315,103 +315,82 @@ function Billing() {
           </CardBody>
         </Card>
       </Grid>
-      <Grid templateColumns={{ sm: "1fr", lg: "1.6fr 1.2fr" }}>
-        {/* <Card my={{ lg: "24px" }} me={{ lg: "24px" }}>
-          <Flex direction="column">
-            <CardHeader py="12px">
-              <Text color={textColor} fontSize="lg" fontWeight="bold">
-                Billing Information
-              </Text>
+      <div className="row">
+        <div className="col">
+          <Card my="24px" ms={{ lg: "24px" }}>
+            <CardHeader mb="12px">
+              <Flex direction="column" w="100%">
+                <Flex
+                  direction={{ sm: "column", lg: "row" }}
+                  justify={{ sm: "center", lg: "space-between" }}
+                  align={{ sm: "center" }}
+                  w="100%"
+                  my={{ md: "12px" }}
+                >
+                  <Text
+                    color={textColor}
+                    fontSize={{ sm: "lg", md: "xl", lg: "lg" }}
+                    fontWeight="bold"
+                  >
+                    Your Transactions
+                  </Text>
+                  <Flex align="center">
+                    <Icon
+                      as={FaRegCalendarAlt}
+                      color="gray.400"
+                      fontSize="md"
+                      me="6px"
+                    ></Icon>
+                    <Text color="gray.400" fontSize="sm" fontWeight="semibold">
+                      23 - 30 March 2021
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Flex>
             </CardHeader>
             <CardBody>
               <Flex direction="column" w="100%">
-                {billingData.map((row) => {
+                <Text
+                  color="gray.400"
+                  fontSize={{ sm: "sm", md: "md" }}
+                  fontWeight="semibold"
+                  my="12px"
+                >
+                  NEWEST
+                </Text>
+                {newestTransactions.map((row) => {
                   return (
-                    <BillingRow
+                    <TransactionRow
                       name={row.name}
-                      company={row.company}
-                      email={row.email}
-                      number={row.number}
+                      logo={row.logo}
+                      date={row.date}
+                      price={row.price}
+                    />
+                  );
+                })}
+                <Text
+                  color="gray.400"
+                  fontSize={{ sm: "sm", md: "md" }}
+                  fontWeight="semibold"
+                  my="12px"
+                >
+                  OLDER
+                </Text>
+                {olderTransactions.map((row) => {
+                  return (
+                    <TransactionRow
+                      name={row.name}
+                      logo={row.logo}
+                      date={row.date}
+                      price={row.price}
                     />
                   );
                 })}
               </Flex>
             </CardBody>
-          </Flex>
-        </Card> */}
-        <Card my="24px" ms={{ lg: "24px" }}>
-          <CardHeader mb="12px">
-            <Flex direction="column" w="100%">
-              <Flex
-                direction={{ sm: "column", lg: "row" }}
-                justify={{ sm: "center", lg: "space-between" }}
-                align={{ sm: "center" }}
-                w="100%"
-                my={{ md: "12px" }}
-              >
-                <Text
-                  color={textColor}
-                  fontSize={{ sm: "lg", md: "xl", lg: "lg" }}
-                  fontWeight="bold"
-                >
-                  Your Transactions
-                </Text>
-                <Flex align="center">
-                  <Icon
-                    as={FaRegCalendarAlt}
-                    color="gray.400"
-                    fontSize="md"
-                    me="6px"
-                  ></Icon>
-                  <Text color="gray.400" fontSize="sm" fontWeight="semibold">
-                    23 - 30 March 2021
-                  </Text>
-                </Flex>
-              </Flex>
-            </Flex>
-          </CardHeader>
-          <CardBody>
-            <Flex direction="column" w="100%">
-              <Text
-                color="gray.400"
-                fontSize={{ sm: "sm", md: "md" }}
-                fontWeight="semibold"
-                my="12px"
-              >
-                NEWEST
-              </Text>
-              {newestTransactions.map((row) => {
-                return (
-                  <TransactionRow
-                    name={row.name}
-                    logo={row.logo}
-                    date={row.date}
-                    price={row.price}
-                  />
-                );
-              })}
-              <Text
-                color="gray.400"
-                fontSize={{ sm: "sm", md: "md" }}
-                fontWeight="semibold"
-                my="12px"
-              >
-                OLDER
-              </Text>
-              {olderTransactions.map((row) => {
-                return (
-                  <TransactionRow
-                    name={row.name}
-                    logo={row.logo}
-                    date={row.date}
-                    price={row.price}
-                  />
-                );
-              })}
-            </Flex>
-          </CardBody>
-        </Card>
-      </Grid>
+          </Card>
+        </div>
+      </div>
     </Flex>
   );
 }

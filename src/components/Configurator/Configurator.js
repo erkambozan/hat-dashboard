@@ -51,16 +51,7 @@ export default function Configurator(props) {
         blockScrollOnMount={false}
       >
         <DrawerContent>
-          <DrawerHeader pt="24px" px="24px">
-            <DrawerCloseButton />
-            <Text fontSize="xl" fontWeight="bold" mt="16px">
-              Purity UI Configurator
-            </Text>
-            <Text fontSize="md" mb="16px">
-              See your dashboard options.
-            </Text>
-            <Separator />
-          </DrawerHeader>
+            
           <DrawerBody w="340px" ps="24px" pe="40px">
             <Flex flexDirection="column">
               <Box>

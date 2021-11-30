@@ -336,8 +336,12 @@ export default function Dashboard() {
             </Portal>
           </CardBody>
         </Card>
-        <Card minHeight="290.5px" p="1.2rem">
-          <CardBody w="100%">
+
+      </Grid>
+      <div className="row">
+        <div className="col">
+          <Card minHeight="290.5px" p="1.2rem">
+            <CardBody w="100%">
               <Flex
                 flexDirection="column"
                 h="100%"
@@ -407,9 +411,10 @@ export default function Dashboard() {
                   minWidth={{ md: "300px", lg: "auto" }}
                 />
               </Flex>
-          </CardBody>
-        </Card>
-      </Grid>
+            </CardBody>
+          </Card>
+        </div>
+      </div>
 
     </Flex>
   );
