@@ -50,55 +50,74 @@ export default function Dashboard(props) {
     ]);
 
     const overlayRef = React.useRef();
-    
+
     //
     let contents = (
-        <Row>
-         
-          <Col lg={10} md={9} sm={12} >
-            
-            <Col lg={6} md={6} sm={6}>
-              <div className="tokens mr-r50">
-                <div className="token-name">ICO</div>
-                <div className="token-body">
-                  <p>Target – to Raise USD 20,000,000</p>
-                  <button className="right-btn">Price 1 BIT - $1.00</button>
-                  <div className="prices">
-                    <h3 className="f-20">Bonus for ICO :</h3>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Time</th>
-                          <th>bonus</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1day</td>
-                          <td>35%</td>
-                        </tr>
-                        <tr>
-                          <td>2 - 4 Days </td>
-                          <td>20%</td>
-                        </tr>
-                        <tr>
-                          <td>5 - 13 Days</td>
-                          <td>10%</td>
-                        </tr>
-                        <tr>
-                          <td>14 - 31 Day</td>
-                          <td>0%</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+
+        <Col lg={10} md={9} sm={12}  className="col-xs-12 col-lg-offset-1 margin-card col-md-offset-1" >
+            <div className="row">
+                <div className="col">
+                    <Col className="col-xs-12 text-right">
+                        <div className="tokens mr-r50">
+                            <div className="token-name">Pre-sale</div>
+                            <div className="token-body">
+                                <p>Target – to Raise USD 500,000</p>
+                                <button className="left-btn">Price 1 BIT – $0.25</button>
+                                <span className="easypiechart skill-circle">
+                                    <span className="percent head-font">20</span>
+                                    <br />
+                                    <span className="con">Special Bonus</span>
+                                </span>
+                            </div>
+                        </div>
+                    </Col>
+
                 </div>
-              </div>
-            </Col>
-          </Col>
-        </Row>
-      )
-      
+                <div className="col">
+                    <Col className="col-xs-12 text-right">
+                        <div className="tokens mr-r50">
+                            <div className="token-name">ICO</div>
+                            <div className="token-body">
+                                <p>Target – to Raise USD 20,000,000</p>
+                                <button className="right-btn">Price 1 BIT - $1.00</button>
+                                <div className="prices">
+                                    <h3 className="f-20">Bonus for ICO :</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>bonus</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1day</td>
+                                                <td>35%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2 - 4 Days </td>
+                                                <td>20%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5 - 13 Days</td>
+                                                <td>10%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>14 - 31 Day</td>
+                                                <td>0%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                </div>
+            </div>
+        </Col>
+
+    )
+
     //
 
     return (<>
@@ -248,15 +267,21 @@ export default function Dashboard(props) {
             </SimpleGrid>
 
         </Flex>
-        
-        <div id="tokens" className="wd_scroll">
-        <section className="tokens-area section">
-          <Container>
-            {contents}
-          </Container>
-        </section>
-      </div>
-        
+        <div className="wd_scroll_wrap">
+
+            <div id="tokens" className="wd_scroll">
+                <section className="tokens-area section">
+                    <Container>
+                        <div className="row">
+                            {contents}
+                        </div>
+                        <div className="row">
+                            {contents}
+                        </div>
+                    </Container>
+                </section>
+            </div>
+        </div>
 
     </>
     );

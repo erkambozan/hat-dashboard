@@ -332,16 +332,49 @@ export default function Dashboard() {
                   It is all about who takes the opportunity first.
                 </Text>
                 <Spacer />
-                <Flex
-                  align="center"
-                  mt={{ sm: "20px", lg: "40px", xl: "90px" }}
+              </Flex>
+            </Portal>
+          </CardBody>
+        </Card>
+        <Card minHeight="290.5px" p="1.2rem">
+          <CardBody w="100%">
+              <Flex
+                flexDirection="column"
+                h="100%"
+                lineHeight="1.6"
+                width={{ lg: "45%" }}
+              >
+                <Text fontSize="sm" color="gray.400" fontWeight="bold">
+                  Built by developers
+                </Text>
+                <Text
+                  fontSize="lg"
+                  color={textColor}
+                  fontWeight="bold"
+                  pb=".5rem"
                 >
-                  <Button p="0px" variant="no-hover" bg="transparent" mt="12px">
+                  Purity UI Dashboard
+                </Text>
+                <Text fontSize="sm" color="gray.400" fontWeight="normal">
+                  From colors, cards, typography to complex elements, you will
+                  find the full documentation.
+                </Text>
+                <Spacer />
+                <Flex align="center">
+                  <Button
+                    p="0px"
+                    variant="no-hover"
+                    bg="transparent"
+                    my={{ sm: "1.5rem", lg: "0px" }}
+                  >
                     <Text
                       fontSize="sm"
+                      color={textColor}
                       fontWeight="bold"
-                      _hover={{ me: "4px" }}
+                      cursor="pointer"
                       transition="all .5s ease"
+                      my={{ sm: "1.5rem", lg: "0px" }}
+                      _hover={{ me: "4px" }}
                     >
                       Read more
                     </Text>
@@ -349,295 +382,35 @@ export default function Dashboard() {
                       as={BsArrowRight}
                       w="20px"
                       h="20px"
-                      fontSize="xl"
+                      fontSize="2xl"
                       transition="all .5s ease"
                       mx=".3rem"
                       cursor="pointer"
-                      _hover={{ transform: "translateX(20%)" }}
                       pt="4px"
+                      _hover={{ transform: "translateX(20%)" }}
                     />
                   </Button>
                 </Flex>
               </Flex>
-            </Portal>
-          </CardBody>
-        </Card>
-      </Grid>
-      <Grid
-        templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
-        templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
-        gap="24px"
-        mb={{ lg: "26px" }}
-      >
-        <Card p="16px">
-          <CardBody>
-            <Flex direction="column" w="100%">
-              <BarChart />
+              <Spacer />
               <Flex
-                direction="column"
-                mt="24px"
-                mb="36px"
-                alignSelf="flex-start"
+                bg="teal.300"
+                align="center"
+                justify="center"
+                borderRadius="15px"
+                width={{ lg: "40%" }}
+                minHeight={{ sm: "250px" }}
               >
-                <Text
-                  fontSize="lg"
-                  color={textColor}
-                  fontWeight="bold"
-                  mb="6px"
-                >
-                  Active Users
-                </Text>
-                <Text fontSize="md" fontWeight="medium" color="gray.400">
-                  <Text as="span" color="green.400" fontWeight="bold">
-                    (+23%)
-                  </Text>{" "}
-                  than last week
-                </Text>
-              </Flex>
-              <SimpleGrid gap={{ sm: "12px" }} columns={4}>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <WalletIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Users
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    32,984
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={20}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <RocketIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Clicks
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    2.42m
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={90}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <CartIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Sales
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    2,400$
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={30}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <StatsIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Items
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    320
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={50}
-                  />
-                </Flex>
-              </SimpleGrid>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card p="28px 10px 16px 0px" mb={{ sm: "26px", lg: "0px" }}>
-          <CardHeader mb="20px" pl="22px">
-            <Flex direction="column" alignSelf="flex-start">
-              <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">
-                Sales Overview
-              </Text>
-              <Text fontSize="md" fontWeight="medium" color="gray.400">
-                <Text as="span" color="green.400" fontWeight="bold">
-                  (+5%) more
-                </Text>{" "}
-                in 2021
-              </Text>
-            </Flex>
-          </CardHeader>
-          <Box w="100%" h={{ sm: "300px" }} ps="8px">
-            <LineChart />
-          </Box>
-        </Card>
-      </Grid>
-      <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
-        templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
-        gap="24px"
-      >
-        <Card p="16px" overflowX={{ sm: "scroll", xl: "hidden" }}>
-          <CardHeader p="12px 0px 28px 0px">
-            <Flex direction="column">
-              <Text
-                fontSize="lg"
-                color={textColor}
-                fontWeight="bold"
-                pb=".5rem"
-              >
-                Projects
-              </Text>
-              <Flex align="center">
-                <Icon
-                  as={IoCheckmarkDoneCircleSharp}
-                  color="teal.300"
-                  w={4}
-                  h={4}
-                  pe="3px"
+                <Image
+                  src={logoChakra}
+                  alt="chakra image"
+                  minWidth={{ md: "300px", lg: "auto" }}
                 />
-                <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                  <Text fontWeight="bold" as="span">
-                    30 done
-                  </Text>{" "}
-                  this month.
-                </Text>
               </Flex>
-            </Flex>
-          </CardHeader>
-          <Table variant="simple" color={textColor}>
-            <Thead>
-              <Tr my=".8rem" ps="0px">
-                <Th ps="0px" color="gray.400">
-                  Companies
-                </Th>
-                <Th color="gray.400">Members</Th>
-                <Th color="gray.400">Budget</Th>
-                <Th color="gray.400">Completion</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {dashboardTableData.map((row) => {
-                return (
-                  <DashboardTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    members={row.members}
-                    budget={row.budget}
-                    progression={row.progression}
-                  />
-                );
-              })}
-            </Tbody>
-          </Table>
-        </Card>
-        <Card maxH="100%">
-          <CardHeader p="22px 0px 35px 14px">
-            <Flex direction="column">
-              <Text
-                fontSize="lg"
-                color={textColor}
-                fontWeight="bold"
-                pb=".5rem"
-              >
-                Orders overview
-              </Text>
-              <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                <Text fontWeight="bold" as="span" color="teal.300">
-                  +30%
-                </Text>{" "}
-                this month.
-              </Text>
-            </Flex>
-          </CardHeader>
-          <CardBody ps="20px" pe="0px" mb="31px" position="relative">
-            <Flex direction="column">
-              {timelineData.map((row, index, arr) => {
-                return (
-                  <TimelineRow
-                    logo={row.logo}
-                    title={row.title}
-                    date={row.date}
-                    color={row.color}
-                    index={index}
-                    arrLength={arr.length}
-                  />
-                );
-              })}
-            </Flex>
           </CardBody>
         </Card>
       </Grid>
+
     </Flex>
   );
 }
