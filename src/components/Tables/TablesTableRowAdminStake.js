@@ -1,5 +1,7 @@
 import {
+    Avatar,
     Badge,
+    Button,
     Flex,
     Td,
     Text,
@@ -8,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function TablesTableRow(props) {
-    const {startedStakeAmount, expiryStakeAmount, expiryStakeTime, stakePercentage, startDate, endDate, status} = props;
+function TablesTableRowAdminStake(props) {
+    const {userId, email, startedStakeAmount, expiryStakeAmount, expiryStakeTime, stakePercentage, startDate, endDate, status} = props;
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
@@ -34,6 +36,20 @@ function TablesTableRow(props) {
             {/*        </Flex>*/}
             {/*    </Flex>*/}
             {/*</Td>*/}
+            <Td>
+                <Flex direction="column">
+                    <Text fontSize="md" color={textColor} fontWeight="bold">
+                        {userId}
+                    </Text>
+                </Flex>
+            </Td>
+            <Td>
+                <Flex direction="column">
+                    <Text fontSize="md" color={textColor} fontWeight="bold">
+                        {email}
+                    </Text>
+                </Flex>
+            </Td>
             <Td>
                 <Flex direction="column">
                     <Text fontSize="md" color={textColor} fontWeight="bold">
@@ -67,6 +83,18 @@ function TablesTableRow(props) {
                 </Text>
             </Td>
             <Td>
+                <Button p="0px" bg="transparent" variant="no-hover">
+                    <Text
+                        fontSize="md"
+                        color="gray.400"
+                        fontWeight="bold"
+                        cursor="pointer"
+                    >
+                        Edit
+                    </Text>
+                </Button>
+            </Td>
+            <Td>
                 <Badge
                     bg={status === "ACTIVE" ? "green.400" : bgStatus}
                     color={status === "ACTIVE" ? "white" : colorStatus}
@@ -81,4 +109,4 @@ function TablesTableRow(props) {
     );
 }
 
-export default TablesTableRow;
+export default TablesTableRowAdminStake;

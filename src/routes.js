@@ -7,6 +7,9 @@ import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 import SignOut from "views/Pages/SignOut.js";
+import Stake from "views/Dashboard/Stake/Stake";
+import AdminStake from "views/Dashboard/AdminStake.js";
+import AdminStakeSettings from "views/Dashboard/AdminStakeSettings.js";
 
 import {
   HomeIcon,
@@ -44,13 +47,37 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/rtl-support-page",
-    name: "RTL",
-    rtlName: "آرتيإل",
-    icon: <SupportIcon color="inherit" />,
-    component: RTLPage,
-    layout: "/rtl",
+    path: "/stake",
+    name: "Stake",
+    rtlName: "لوحة القيادة",
+    icon: <CreditIcon color="inherit" />,
+    component: Stake,
+    layout: "/admin",
   },
+  {
+    path: "/admin-stake",
+    name: "Admin Stake",
+    rtlName: "لوحة القيادة",
+    icon: <CreditIcon color="inherit" />,
+    component: AdminStake,
+    layout: "/admin",
+  },
+  {
+    path: "/admin-stake-settings",
+    name: "Admin Stake Settings",
+    rtlName: "لوحة القيادة",
+    icon: <CreditIcon color="inherit" />,
+    component: AdminStakeSettings,
+    layout: "/admin",
+  },
+  // {
+  //   path: "/rtl-support-page",
+  //   name: "RTL",
+  //   rtlName: "آرتيإل",
+  //   icon: <SupportIcon color="inherit" />,
+  //   component: RTLPage,
+  //   layout: "/rtl",
+  // },
   {
     name: "ACCOUNT PAGES",
     category: "account",

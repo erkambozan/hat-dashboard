@@ -34,7 +34,7 @@ ReactDOM.render(
       <Switch>
         <Route path={`/auth`} component={AuthLayout} />
         <ProtectedRoute path={`/admin`} component={AdminLayout} />
-        <ProtectedRoute path={`/rtl`} component={RTLLayout} />
+        {/*<ProtectedRoute path={`/rtl`} component={RTLLayout} />*/}
         <Redirect from={`/`} to="/admin/dashboard" />
       </Switch>
     </HashRouter>

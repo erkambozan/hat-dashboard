@@ -1,5 +1,7 @@
 import {
+    Avatar,
     Badge,
+    Button,
     Flex,
     Td,
     Text,
@@ -8,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function TablesTableRow(props) {
-    const {startedStakeAmount, expiryStakeAmount, expiryStakeTime, stakePercentage, startDate, endDate, status} = props;
+function TablesTableRowAdminStakeSettings(props) {
+    const {expiryStakeTime, stakePercentage, stakeType, minimumLimit} = props;
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
@@ -35,18 +37,6 @@ function TablesTableRow(props) {
             {/*    </Flex>*/}
             {/*</Td>*/}
             <Td>
-                <Flex direction="column">
-                    <Text fontSize="md" color={textColor} fontWeight="bold">
-                        {startedStakeAmount}
-                    </Text>
-                </Flex>
-            </Td>
-            <Td>
-                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {expiryStakeAmount}
-                </Text>
-            </Td>
-            <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
                     {expiryStakeTime}
                 </Text>
@@ -58,27 +48,28 @@ function TablesTableRow(props) {
             </Td>
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {startDate}
+                    {stakeType}
                 </Text>
             </Td>
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {endDate}
+                    {minimumLimit}
                 </Text>
             </Td>
             <Td>
-                <Badge
-                    bg={status === "ACTIVE" ? "green.400" : bgStatus}
-                    color={status === "ACTIVE" ? "white" : colorStatus}
-                    fontSize="16px"
-                    p="3px 10px"
-                    borderRadius="8px"
-                >
-                    {status}
-                </Badge>
+                <Button p="0px" bg="transparent" variant="no-hover">
+                    <Text
+                        fontSize="md"
+                        color="gray.400"
+                        fontWeight="bold"
+                        cursor="pointer"
+                    >
+                        Edit
+                    </Text>
+                </Button>
             </Td>
         </Tr>
     );
 }
 
-export default TablesTableRow;
+export default TablesTableRowAdminStakeSettings;
