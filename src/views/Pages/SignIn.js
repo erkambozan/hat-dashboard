@@ -14,7 +14,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
-import signInImage from "assets/img/signInImage.png";
+import signInImage from "assets/img/signin-background.jpg";
 
 import { useAuth } from "../../auth-context/auth.context";
 import AuthApi from "../../api/auth";
@@ -221,9 +221,6 @@ function SignIn() {
                 maxW="100%"
                 mt="0px"
               >
-                <Text color={textColor} fontWeight="medium">
-                  Open-source Full-Stack Seed Project 
-                </Text>
               </Flex>
             </Flex>
           }

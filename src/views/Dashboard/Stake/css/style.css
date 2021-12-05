@@ -3598,7 +3598,7 @@ footer .footer-top .con ul li a:hover {
 }
 
 .tokens-area .tokens .token-name {
-    display: inline-block;
+    display: block;
     color: #fff;
     background: rgba(57, 100, 208, 1);
     background: -moz-linear-gradient(left, rgba(57, 100, 208, 1) 0%, rgba(45, 193, 201, 1) 100%);
@@ -3610,7 +3610,7 @@ footer .footer-top .con ul li a:hover {
     line-height: 42px;
     height: 42px;
     padding: 0 45px;
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px 15px 15px 15px;
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 900;

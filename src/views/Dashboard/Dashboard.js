@@ -25,14 +25,12 @@ import {
 } from "@chakra-ui/react";
 // assets
 import peopleImage from "assets/img/people-image.png";
-import logoChakra from "assets/svg/logo-white.svg";
+import logoChakra from "assets/svg/live-hat.svg";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import BarChart from "components/Charts/BarChart";
-import LineChart from "components/Charts/LineChart";
 import IconBox from "components/Icons/IconBox";
+import TotalBalance from "./Components/TotalBalance.js"
 // Custom icons
 import {
   CartIcon,
@@ -74,41 +72,7 @@ export default function Dashboard() {
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
-        <Card minH="83px">
-          <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-              <Stat me="auto">
-                <StatLabel
-                  fontSize="sm"
-                  color="gray.400"
-                  fontWeight="bold"
-                  pb=".1rem"
-                >
-                  Today's Money
-                </StatLabel>
-                <Flex>
-                  <StatNumber fontSize="lg" color={textColor}>
-                    $53,000
-                  </StatNumber>
-                  <StatHelpText
-                    alignSelf="flex-end"
-                    justifySelf="flex-end"
-                    m="0px"
-                    color="green.400"
-                    fontWeight="bold"
-                    ps="3px"
-                    fontSize="md"
-                  >
-                    +55%
-                  </StatHelpText>
-                </Flex>
-              </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside} />
-              </IconBox>
-            </Flex>
-          </CardBody>
-        </Card>
+        <TotalBalance/>
         <Card minH="83px">
           <CardBody>
             <Flex flexDirection="row" align="center" justify="center" w="100%">
@@ -231,20 +195,16 @@ export default function Dashboard() {
                 lineHeight="1.6"
                 width={{ lg: "45%" }}
               >
-                <Text fontSize="sm" color="gray.400" fontWeight="bold">
-                  Built by developers
-                </Text>
                 <Text
                   fontSize="lg"
                   color={textColor}
                   fontWeight="bold"
                   pb=".5rem"
                 >
-                  Purity UI Dashboard
+                  Health Aid Token Billing
                 </Text>
                 <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                  From colors, cards, typography to complex elements, you will
-                  find the full documentation.
+                  Payments, Account Balance Details
                 </Text>
                 <Spacer />
                 <Flex align="center">
@@ -263,7 +223,7 @@ export default function Dashboard() {
                       my={{ sm: "1.5rem", lg: "0px" }}
                       _hover={{ me: "4px" }}
                     >
-                      Read more
+                      Go To
                     </Text>
                     <Icon
                       as={BsArrowRight}
@@ -290,7 +250,7 @@ export default function Dashboard() {
               >
                 <Image
                   src={logoChakra}
-                  alt="chakra image"
+                  alt="image"
                   minWidth={{ md: "300px", lg: "auto" }}
                 />
               </Flex>
@@ -325,11 +285,10 @@ export default function Dashboard() {
                 lineHeight="1.6"
               >
                 <Text fontSize="xl" fontWeight="bold" pb=".3rem">
-                  Work with the rockets
+                  Share and Win
                 </Text>
                 <Text fontSize="sm" fontWeight="normal" w={{ lg: "92%" }}>
-                  Wealth creation is a revolutionary recent positive-sum game.
-                  It is all about who takes the opportunity first.
+                  If you want to withdraw the token you will earn from each reference directly, invite people with your reference code.
                 </Text>
                 <Spacer />
               </Flex>
@@ -348,20 +307,16 @@ export default function Dashboard() {
                 lineHeight="1.6"
                 width={{ lg: "45%" }}
               >
-                <Text fontSize="sm" color="gray.400" fontWeight="bold">
-                  Built by developers
-                </Text>
                 <Text
                   fontSize="lg"
                   color={textColor}
                   fontWeight="bold"
                   pb=".5rem"
                 >
-                  Purity UI Dashboard
+                  Health Aid Stake
                 </Text>
                 <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                  From colors, cards, typography to complex elements, you will
-                  find the full documentation.
+                  Stake your tokens
                 </Text>
                 <Spacer />
                 <Flex align="center">
@@ -380,7 +335,7 @@ export default function Dashboard() {
                       my={{ sm: "1.5rem", lg: "0px" }}
                       _hover={{ me: "4px" }}
                     >
-                      Read more
+                      Go To
                     </Text>
                     <Icon
                       as={BsArrowRight}

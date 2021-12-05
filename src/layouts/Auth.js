@@ -89,7 +89,7 @@ export default function Pages(props) {
         <Portal containerRef={navRef}>
           <AuthNavbar
             secondary={getActiveNavbar(routes)}
-            logoText="PURITY UI DASHBOARD"
+            logoText="HEALTH AID DASHBOARD"
           />
         </Portal>
         <Box w="100%">
@@ -99,9 +99,6 @@ export default function Pages(props) {
               <Redirect from="/auth" to="/auth/sigin" />
             </Switch>
           </Box>
-        </Box>
-        <Box px="24px" mx="auto" width="1044px" maxW="100%">
-          <Footer />
         </Box>
       </Box>
     </ChakraProvider>
