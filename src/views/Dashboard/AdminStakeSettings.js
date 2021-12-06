@@ -17,6 +17,43 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import TablesTableRowAdminStakeSettings from "components/Tables/TablesTableRowAdminStakeSettings";
 import { tablesProjectData, tablesTableData } from "variables/general";
+import StakeApi from "api/stake";
+
+class GetAllStakeSettings extends React.Component {
+    state = {
+        response: []
+    }
+    componentDidMount() {
+        StakeApi.GetAllStakeSettings()
+            .then(res => {
+                console.log("responze:", res)
+                this.setState({ response: res.data })
+            })
+            .catch(err => console.log("err:", err))
+        console.log("fjdskl")
+    }
+
+    getReady = () => {
+        const result = this.state.response.map((item) => {
+            return (
+                <TablesTableRowAdminStakeSettings
+                    expiryStakeTime={item.expiry_stake_time}
+                    stakePercentage={item.stake_percentage}
+                    stakeType={item.stake_type}
+                    minimumLimit={item.minimum_limit}
+                />
+            );
+        })
+
+        return result;
+    }
+
+    render() {
+        return (
+            <>{this.getReady()}</>
+        )
+    }
+}
 
 function AdminStakeSettings() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -52,16 +89,7 @@ function AdminStakeSettings() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {tablesTableData.map((row) => {
-                                return (
-                                    <TablesTableRowAdminStakeSettings
-                                        expiryStakeTime={row.expiryStakeTime}
-                                        stakePercentage={row.stakePercentage}
-                                        stakeType={row.stakeType}
-                                        minimumLimit={row.minimumLimit}
-                                    />
-                                );
-                            })}
+                            <GetAllStakeSettings />
                         </Tbody>
                     </Table>
                 </CardBody>

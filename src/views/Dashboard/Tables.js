@@ -17,6 +17,51 @@ import CardBody from "components/Card/CardBody.js";
 import TablesProjectRow from "components/Tables/TablesProjectRow";
 import TablesTableRow from "components/Tables/TablesTableRow";
 import { tablesProjectData, tablesTableData } from "variables/general";
+import StakeApi from "api/stake";
+
+class GetStakesByUserId extends React.Component {
+  state={
+      response:[]
+  }
+  componentDidMount(){
+      StakeApi.FindStakesByUserId()
+      .then(res=>{
+          console.log("responze:",res)
+          this.setState({response:res.data})
+      })
+      .catch(err=>console.log("err:",err))
+      console.log("fjdskl")       
+  }
+
+  getReady = ()=>{
+      const result = this.state.response.map((item) => {
+          return (
+            <TablesTableRow
+            name={item.stake_type}
+            logo={item.logo}
+            email={item.email}
+            startedStakeAmount={item.started_stake_amount}
+            expiryStakeAmount={item.expiry_stake_amount}
+            expiryStakeTime={item.expiry_stake_time}
+            stakePercentage={item.stake_percentage}
+            startDate={item.start_date}
+            endDate={item.end_date}
+            date={item.date}
+            status={item.stake_status}
+          />
+          );
+      })
+
+      return result;
+  }
+
+  render() {
+      return(
+          <>{this.getReady()}</>
+      )
+  }
+}
+
 
 function Tables() {
   const textColor = useColorModeValue("gray.700", "white");
@@ -46,23 +91,7 @@ function Tables() {
               </Tr>
             </Thead>
             <Tbody>
-              {tablesTableData.map((row) => {
-                return (
-                  <TablesTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    email={row.email}
-                    startedStakeAmount={row.startedStakeAmount}
-                    expiryStakeAmount={row.expiryStakeAmount}
-                    expiryStakeTime={row.expiryStakeTime}
-                    stakePercentage={row.stakePercentage}
-                    startDate={row.startDate}
-                    endDate={row.endDate}
-                    date={row.date}
-                    status={row.status}
-                  />
-                );
-              })}
+              <GetStakesByUserId/>
             </Tbody>
           </Table>
         </CardBody>
