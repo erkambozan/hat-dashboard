@@ -42,11 +42,10 @@ class PrintStakes extends React.Component {
             .catch(err => console.log("err:", err))
         console.log("fjdskl")
     }
-
     getReady = () => {
         const result = this.state.response.map((item) => {
             return (
-                <Col className="col-xs-6 text-right">
+                <Col  id="stake-margin" className="col-xs-6 text-right ">
                         <div className="tokens mr-r50">
                             <div className="token-name">{item.stake_type}</div>
                             <div className="token-body">
@@ -112,15 +111,8 @@ export default function Dashboard(props) {
 
     //
     let contents = (
-        <div>
-            <Col lg={10} md={9} sm={6} className="col-xs-6 margin-card">
-                <div className="row">
-
                     <PrintStakes/>
-
-                </div>
-            </Col>
-        </div>)
+     )
 
     //
 
@@ -242,7 +234,9 @@ export default function Dashboard(props) {
             <div id="tokens" className="wd_scroll">
                 <section className="tokens-area section">
                     <Container>
+                        <Row>
                         {contents}
+                        </Row>
                     </Container>
                 </section>
             </div>
