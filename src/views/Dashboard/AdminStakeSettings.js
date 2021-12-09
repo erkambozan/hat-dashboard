@@ -11,6 +11,8 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import AddModal from './modals/AddModal'
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -57,7 +59,7 @@ class GetAllStakeSettings extends React.Component {
 
 function AdminStakeSettings() {
     const textColor = useColorModeValue("gray.700", "white");
-
+    const [modalShow, setModalShow] = useState(false);
     return (
         <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
             <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -75,7 +77,7 @@ function AdminStakeSettings() {
                                 <Th color="gray.400">Stake Type</Th>
                                 <Th color="gray.400">Minimum Limit</Th>
                                 <Th>
-                                    <Button p="0px" bg="transparent" variant="no-hover">
+                                    <Button onClick={() => setModalShow(true)} p="0px" bg="transparent" variant="no-hover">
                                         <Text
                                             fontSize="md"
                                             color="blue.400"
@@ -85,6 +87,7 @@ function AdminStakeSettings() {
                                             Add
                                         </Text>
                                     </Button>
+                                    <AddModal show={modalShow} onHide={() => setModalShow(false)} />
                                 </Th>
                             </Tr>
                         </Thead>
