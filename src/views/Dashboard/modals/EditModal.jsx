@@ -13,7 +13,8 @@ import {
 import React, { useState } from "react";
 import AdminStakeApi from 'api/adminstake';
 
-export default function AddModal(props) {
+export default function EditModal(props) {
+
 
     const titleColor = useColorModeValue("teal.300", "teal.200");
     const textColor = useColorModeValue("gray.700", "white");
@@ -24,12 +25,13 @@ export default function AddModal(props) {
     const [stake_percentage, setPercent] = useState(0);
     const [stake_type, setStake] = useState("");
     const [min_limit, setMinLim] = useState(0);
-    
-    const [buttonText, setButtonText] = useState("Create Stake Type");
-    const [error, setError] = useState(undefined);
 
-    const CreateStakeType = ()=>{
-        AdminStakeApi.CreateStakeType({
+    const [buttonText, setButtonText] = useState("Update Stake Type");
+    const [error, setError] = useState(undefined);
+    const {id,expiryStakeTime, stakePercentage, stakeType, minimumLimit} = props;
+    
+    const updateStakeType = (id,data)=>{
+        AdminStakeApi.UpdateStakeType(id,{
             expiry_stake_time: expiry_stake_time,
             stake_percentage: stake_percentage,
             stake_type: stake_type,
@@ -37,7 +39,7 @@ export default function AddModal(props) {
         })
         .then(res=>console.log("Guncelme yapildi:"+res))
     }
-
+    
     return (
         <Modal
             {...props}
@@ -45,7 +47,6 @@ export default function AddModal(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-
             <Modal.Body>
                 <Flex
                     direction="column"
@@ -81,6 +82,7 @@ export default function AddModal(props) {
                                     placeholder="Stack name"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={stakeType}
                                     onChange={(event) => {
                                         setStake(event.target.value);
                                         setError(undefined);
@@ -97,6 +99,7 @@ export default function AddModal(props) {
                                     placeholder="%"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={stakePercentage}
                                     onChange={(event) => {
                                         setPercent(event.target.value);
                                         setError(undefined);
@@ -113,6 +116,7 @@ export default function AddModal(props) {
                                     placeholder="Set min limit"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={minimumLimit}
                                     onChange={(event) => {
                                         setMinLim(event.target.value);
                                         setError(undefined);
@@ -129,6 +133,7 @@ export default function AddModal(props) {
                                     placeholder="monthly based"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={expiryStakeTime}
                                     onChange={(event) => {
                                         setTime(event.target.value);
                                         setError(undefined);
@@ -157,14 +162,14 @@ export default function AddModal(props) {
                                     w="100%"
                                     h="45"
                                     mb="24px"
+                                    onClick={()=>{
+                    updateStakeType(id,props)
+                                    }}
                                     _hover={{
                                         bg: "teal.200",
                                     }}
                                     _active={{
                                         bg: "teal.400",
-                                    }}
-                                    onClick={()=>{
-                                        CreateStakeType();
                                     }}
                                     
                                 >

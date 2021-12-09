@@ -39,6 +39,7 @@ class GetAllStakeSettings extends React.Component {
         const result = this.state.response.map((item) => {
             return (
                 <TablesTableRowAdminStakeSettings
+                    id={item.id}
                     expiryStakeTime={item.expiry_stake_time}
                     stakePercentage={item.stake_percentage}
                     stakeType={item.stake_type}
