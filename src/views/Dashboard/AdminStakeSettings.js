@@ -28,11 +28,10 @@ class GetAllStakeSettings extends React.Component {
     componentDidMount() {
         StakeApi.GetAllStakeSettings()
             .then(res => {
-                console.log("responze:", res)
+                console.log("response:", res)
                 this.setState({ response: res.data })
             })
             .catch(err => console.log("err:", err))
-        console.log("fjdskl")
     }
 
     getReady = () => {

@@ -23,10 +23,12 @@ import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import getTempRoutes from "../../routes";
 
 // FUNCTIONS
 
 function Sidebar(props) {
+  const routes = getTempRoutes()
   // to check for active links and opened collapses
   let location = useLocation();
   // this is for the rest of the collapses
@@ -200,7 +202,7 @@ function Sidebar(props) {
       </>
     });
   };
-  const { logoText, routes, sidebarVariant } = props;
+  const { logoText, sidebarVariant } = props;
 
   var links = <>{createLinks(routes)}</>;
   //  BRAND

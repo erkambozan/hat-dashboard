@@ -16,26 +16,17 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import IconBox from "components/Icons/IconBox";
-import { MastercardIcon, VisaIcon } from "components/Icons/Icons";
-import BillingRow from "components/Tables/BillingRow";
-import InvoicesRow from "components/Tables/InvoicesRow";
 import TransactionRow from "components/Tables/TransactionRow";
 import { Separator } from "components/Separator/Separator";
 import React from "react";
 import {
-  FaBuyNLarge,
   FaCoins,
-  FaDollarSign,
-  FaPaypal,
-  FaPencilAlt,
   FaPlus,
   FaRegCalendarAlt,
   FaWallet,
 } from "react-icons/fa";
 import { RiMastercardFill } from "react-icons/ri";
 import {
-  billingData,
-  invoicesData,
   newestTransactions,
   olderTransactions,
 } from "variables/general";
