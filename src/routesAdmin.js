@@ -54,7 +54,22 @@ var dashRoutes = [
     component: Stake,
     layout: "/admin",
   },
-  
+  {
+    path: "/admin-stake",
+    name: "Admin Stake",
+    rtlName: "لوحة القيادة",
+    icon: <CreditIcon color="inherit" />,
+    component: AdminStake,
+    layout: "/admin",
+  },
+  {
+    path: "/admin-stake-settings",
+    name: "Admin Stake Settings",
+    rtlName: "لوحة القيادة",
+    icon: <CreditIcon color="inherit" />,
+    component: AdminStakeSettings,
+    layout: "/admin",
+  },
   // {
   //   path: "/rtl-support-page",
   //   name: "RTL",

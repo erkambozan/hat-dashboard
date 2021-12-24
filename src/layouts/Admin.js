@@ -7,7 +7,8 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "routes.js";
+import routesnormal from "routes.js";
+import routesAdmin from "routesAdmin.js"
 // Custom Chakra theme
 import theme from "theme/theme.js";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
@@ -15,7 +16,23 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
+
+
+
 export default function Dashboard(props) {
+
+  
+  // TODO:abi yazdigin fonksiyon buraya gelecek
+  // FIXME: manage degerini degistirecek
+ 
+  let manage = true
+  var routes
+  if(manage){
+    routes = routesAdmin
+  }else{
+    routes = routesnormal
+  }
+
   const { ...rest } = props;
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
