@@ -5,9 +5,8 @@ import Footer from "components/Footer/Footer.js";
 // Layout components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import getTempRoutes from "routes.js";
 // Custom Chakra theme
 import theme from "theme/theme.js";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
@@ -15,9 +14,27 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
+import {MANAGE, Perm} from "../api/perm";
+import routesAdmin from "../routesAdmin"
+import routesUser from "../routes"
 export default function Dashboard(props) {
-  const routes = getTempRoutes()
-  console.log("Routes return : " + routes)
+  const [manage, setManage] = useState(false);
+  //const [routes, setRoutes] = useState([]);
+  useEffect(() => {
+    setTimeout(() => {
+      Perm.userInfo().then(res =>
+          Perm.setPerm(res.id, MANAGE, setManage),
+      )
+    }, 1);
+  }, []);
+
+  let routes
+  if (manage){
+    routes = routesAdmin
+  }else {
+    routes = routesUser
+  }
+
   const { ...rest } = props;
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");

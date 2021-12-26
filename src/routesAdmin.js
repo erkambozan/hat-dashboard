@@ -2,12 +2,15 @@
 import Dashboard from "views/Dashboard/Dashboard.js";
 import Tables from "views/Dashboard/Tables.js";
 import Billing from "views/Dashboard/Billing.js";
+import RTLPage from "views/RTL/RTLPage.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 import SignOut from "views/Pages/SignOut.js";
 import Stake from "views/Dashboard/Stake/Stake";
-import UserWithdrawal from "views/Dashboard/UserWithdrawal";
+import AdminStake from "views/Dashboard/AdminStake.js";
+import AdminStakeSettings from "views/Dashboard/AdminStakeSettings.js";
+import AdminWithdrawal from "views/Dashboard/AdminWithdrawal.js";
 
 import {
     HomeIcon,
@@ -16,7 +19,10 @@ import {
     PersonIcon,
     DocumentIcon,
     RocketIcon,
+    SupportIcon,
 } from "components/Icons/Icons";
+import {SlackLogo} from "./components/Icons/Icons";
+import UserWithdrawal from "./views/Dashboard/UserWithdrawal";
 
 var dashRoutes = [
     {
@@ -35,7 +41,7 @@ var dashRoutes = [
         component: Tables,
         layout: "/user",
     },
-    /*{
+   /* {
         path: "/billing",
         name: "Billing",
         rtlName: "لوحة القيادة",
@@ -57,6 +63,30 @@ var dashRoutes = [
         rtlName: "لوحة القيادة",
         icon: <CreditIcon color="inherit" />,
         component: UserWithdrawal,
+        layout: "/user",
+    },
+            {
+                path: "/admin-all-stake",
+                name: "Admin All Stake",
+                rtlName: "لوحة القيادة",
+                icon: <SlackLogo color="inherit" />,
+                component: AdminStake,
+                layout: "/user",
+            },
+            {
+                path: "/admin-stake-settings",
+                name: "Admin Stake Settings",
+                rtlName: "لوحة القيادة",
+                icon: <SlackLogo color="inherit" />,
+                component: AdminStakeSettings,
+                layout: "/user",
+            },
+    {
+        path: "/admin-all-withdraws",
+        name: "Admin All Withdraws",
+        rtlName: "لوحة القيادة",
+        icon: <SlackLogo color="inherit" />,
+        component: AdminWithdrawal,
         layout: "/user",
     },
 

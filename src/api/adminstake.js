@@ -2,7 +2,9 @@ import axios from "axios";
 
 let base = "/hat";
 class AdminStakeApi {
-
+  static GetAllWithdraw = ()=>{
+    return axios.get(`${base}/admin/withdraw`,this.getToken())
+  }
   static GetAllStakes = ()=>{
     return axios.get(`${base}/admin/stakes`,this.getToken())
   }

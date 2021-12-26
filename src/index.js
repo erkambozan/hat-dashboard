@@ -25,6 +25,7 @@ import RTLLayout from "layouts/RTL.js";
 
 import { ProtectedRoute } from "./layouts/ProtectedRoute";
 import { AuthProvider } from "auth-context/auth.context";
+import ControlToken from "./ControlToken";
 let user = localStorage.getItem("user");
 user = JSON.parse(user);
 
