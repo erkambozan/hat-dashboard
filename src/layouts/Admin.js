@@ -5,9 +5,8 @@ import Footer from "components/Footer/Footer.js";
 // Layout components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "routes.js";
 // Custom Chakra theme
 import theme from "theme/theme.js";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
@@ -15,7 +14,27 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
+import {MANAGE, Perm} from "../api/perm";
+import routesAdmin from "../routesAdmin"
+import routesUser from "../routes"
 export default function Dashboard(props) {
+  const [manage, setManage] = useState(false);
+  //const [routes, setRoutes] = useState([]);
+  useEffect(() => {
+    setTimeout(() => {
+      Perm.userInfo().then(res =>
+          Perm.setPerm(res.id, MANAGE, setManage),
+      )
+    }, 1);
+  }, []);
+
+  let routes
+  if (manage){
+    routes = routesAdmin
+  }else {
+    routes = routesUser
+  }
+
   const { ...rest } = props;
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
@@ -24,7 +43,7 @@ export default function Dashboard(props) {
   const mainPanel = React.createRef();
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
+    return window.location.pathname !== "/user/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -78,7 +97,7 @@ export default function Dashboard(props) {
       if (prop.category === "account") {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/user") {
         return (
           <Route
             path={prop.layout + prop.path}

@@ -9,10 +9,10 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import EditModal from "views/Dashboard/modals/EditModal";
+import EditModalUserWithdrawal from "views/Dashboard/modals/EditModalUserWithdrawal";
 import { useState } from "react";
-function TablesTableRowAdminStakeSettings(props) {
-    const {id,expiryStakeTime, stakePercentage, stakeType, minimumLimit} = props;
+function TablesTableRowUserWithdrawal(props) {
+    const {id,walletAddress, withdrawAmount, status} = props;
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
@@ -20,25 +20,20 @@ function TablesTableRowAdminStakeSettings(props) {
 
     return (
         <Tr>
-           
+
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {expiryStakeTime}
+                    {walletAddress}
                 </Text>
             </Td>
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {stakePercentage}
+                    {withdrawAmount}
                 </Text>
             </Td>
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {stakeType}
-                </Text>
-            </Td>
-            <Td>
-                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {minimumLimit}
+                    {status}
                 </Text>
             </Td>
             <Td>
@@ -52,15 +47,14 @@ function TablesTableRowAdminStakeSettings(props) {
                         Edit
                     </Text>
                 </Button>
-                <EditModal expiryStakeTime={expiryStakeTime}
-                    stakePercentage={stakePercentage}
-                    stakeType={stakeType}
-                    minimumLimit={minimumLimit}
-                    id={id}
-                    show={modalShow} onHide={() => setModalShow(false)}/>
+                <EditModalUserWithdrawal id={id}
+                           walletAddress={walletAddress}
+                           withdrawAmount={withdrawAmount}
+                           status={status}
+                           show={modalShow} onHide={() => setModalShow(false)}/>
             </Td>
         </Tr>
     );
 }
 
-export default TablesTableRowAdminStakeSettings;
+export default TablesTableRowUserWithdrawal;

@@ -26,6 +26,85 @@ import {
 import React, {useState} from "react";
 import './css/style.css';
 import TotalBalance from "../Components/TotalBalance";
+import StakeApi from "api/stake";
+
+
+class PrintStakes extends React.Component {
+    state = {
+        stakeAmount: 0,
+        response: []
+    }
+
+    componentDidMount() {
+        StakeApi.GetAllStakeSettings()
+            .then(res => {
+                console.log("responze:", res)
+                this.setState({response: res.data})
+            })
+            .catch(err => console.log("err:", err))
+    }
+
+    handleSubmit = (event) => {
+        console.log(event.stake_type)
+        console.log(this.state.stakeAmount)
+        StakeApi.MakeStake({
+            stake_type: event.stake_type,
+            stake_amount: this.state.stakeAmount
+        })
+    }
+    handleStakeAmount = (e) => {
+        this.setState({stakeAmount: e.target.value})
+    }
+    getReady = () => {
+        const result = this.state.response.map((item) => {
+            return (
+                <Col id="stake-margin" className="col-xs-6 text-right ">
+                    <div className="tokens mr-r50">
+                        <div className="token-name">{item.stake_type}</div>
+                        <div className="token-body">
+                            <div className="prices">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td> Stake Percentage</td>
+                                        <td> {item.stake_percentage}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Expiry Stake Time</td>
+                                        <td> {item.expiry_stake_time}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Minimum Limit</td>
+                                        <td> {item.minimum_limit} HT</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Stake Amount</label>
+                                        </td>
+                                        <td>
+                                            <input onChange={this.handleStakeAmount} type="text"
+                                                   className="form-control" required/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button onClick={() => this.handleSubmit(item)} className="right-btn">Make Stake</button>
+                        </div>
+                    </div>
+                </Col>
+            );
+        })
+
+        return result;
+    }
+
+    render() {
+        return (
+            <>{this.getReady()}</>
+        )
+    }
+}
 
 
 export default function Dashboard(props) {
@@ -52,90 +131,8 @@ export default function Dashboard(props) {
 
     //
     let contents = (
-        <div>
-            <Col lg={10} md={9} sm={6} className="col-xs-6 margin-card">
-                <div className="row">
-                    <Col className="col-xs-6 text-right">
-                        <div className="tokens mr-r50">
-                            <div className="token-name">GOLD</div>
-                            <div className="token-body">
-                                <div className="prices">
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td> Stake Percentage</td>
-                                            <td> 20%</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Expiry Stake Time</td>
-                                            <td> 90 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Minimum Limit</td>
-                                            <td> 150000 HT</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <button className="right-btn">Make Stake</button>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col className="col-xs-6 text-right">
-                        <div className="tokens mr-r50">
-                            <div className="token-name">GOLD</div>
-                            <div className="token-body">
-                                <div className="prices">
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td> Stake Percentage</td>
-                                            <td> 20%</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Expiry Stake Time</td>
-                                            <td> 90 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Minimum Limit</td>
-                                            <td> 150000 HT</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <button className="right-btn">Make Stake</button>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col className="col-xs-6 text-right">
-                        <div className="tokens mr-r50">
-                            <div className="token-name">GOLD</div>
-                            <div className="token-body">
-                                <div className="prices">
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td> Stake Percentage</td>
-                                            <td> 20%</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Expiry Stake Time</td>
-                                            <td> 90 days</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Minimum Limit</td>
-                                            <td> 150000 HT</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <button className="right-btn">Make Stake</button>
-                            </div>
-                        </div>
-                    </Col>
-                </div>
-            </Col>
-        </div>)
+        <PrintStakes/>
+    )
 
     //
 
@@ -257,7 +254,9 @@ export default function Dashboard(props) {
                 <div id="tokens" className="wd_scroll">
                     <section className="tokens-area section">
                         <Container>
-                            {contents}
+                            <Row>
+                                {contents}
+                            </Row>
                         </Container>
                     </section>
                 </div>

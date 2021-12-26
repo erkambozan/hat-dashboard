@@ -25,6 +25,7 @@ import RTLLayout from "layouts/RTL.js";
 
 import { ProtectedRoute } from "./layouts/ProtectedRoute";
 import { AuthProvider } from "auth-context/auth.context";
+import ControlToken from "./ControlToken";
 let user = localStorage.getItem("user");
 user = JSON.parse(user);
 
@@ -33,9 +34,9 @@ ReactDOM.render(
     <HashRouter>
       <Switch>
         <Route path={`/auth`} component={AuthLayout} />
-        <ProtectedRoute path={`/admin`} component={AdminLayout} />
+        <ProtectedRoute path={`/user`} component={AdminLayout} />
         {/*<ProtectedRoute path={`/rtl`} component={RTLLayout} />*/}
-        <Redirect from={`/`} to="/admin/dashboard" />
+        <Redirect from={`/`} to="/user/dashboard" />
       </Switch>
     </HashRouter>
   </AuthProvider>,

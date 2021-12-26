@@ -16,6 +16,50 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import TablesTableRowAdminStake from "components/Tables/TablesTableRowAdminStake";
 import {tablesProjectData, tablesTableData} from "variables/general";
+import AdminStakeApi from "api/adminstake";
+
+class GetAllStakeSettings extends React.Component {
+    state={
+        response:[]
+    }
+    componentDidMount(){
+        AdminStakeApi.GetAllStakes()
+        .then(res=>{
+            console.log("responze:",res)
+            this.setState({response:res.data})
+        })
+        .catch(err=>console.log("err:",err))
+        console.log("fjdskl")       
+    }
+
+    getReady = ()=>{
+        const result = this.state.response.map((item) => {
+            return (
+                <TablesTableRowAdminStake
+                    userId={item.id}
+                    email={item.stake_type}
+                    startedStakeAmount={item.started_stake_amount}
+                    expiryStakeAmount={item.expiry_stake_amount}
+                    expiryStakeTime={item.expiry_stake_time}
+                    stakePercentage={item.stake_percentage}
+                    startDate={item.start_date}
+                    endDate={item.end_date}
+                    date={item.date}
+                    status={item.stake_status}
+                />
+            );
+        })
+
+        return result;
+    }
+
+    render() {
+        return(
+            <>{this.getReady()}</>
+        )
+    }
+}
+
 
 function AdminStake() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -23,7 +67,7 @@ function AdminStake() {
     return (
         <Flex direction="column" pt={{base: "120px", md: "75px"}}>
             <Card overflowX={{sm: "scroll", xl: "hidden"}}>
-                <CardHeader p="6px 0px 22px 0px">
+                <CardHeader onClick={GetAllStakeSettings} p="6px 0px 22px 0px">
                     <Text fontSize="xl" color={textColor} fontWeight="bold">
                         Stake Table
                     </Text>
@@ -47,22 +91,7 @@ function AdminStake() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {tablesTableData.map((row) => {
-                                return (
-                                    <TablesTableRowAdminStake
-                                        userId={row.userId}
-                                        email={row.email}
-                                        startedStakeAmount={row.startedStakeAmount}
-                                        expiryStakeAmount={row.expiryStakeAmount}
-                                        expiryStakeTime={row.expiryStakeTime}
-                                        stakePercentage={row.stakePercentage}
-                                        startDate={row.startDate}
-                                        endDate={row.endDate}
-                                        date={row.date}
-                                        status={row.status}
-                                    />
-                                );
-                            })}
+                            <GetAllStakeSettings/>
                         </Tbody>
                     </Table>
                 </CardBody>

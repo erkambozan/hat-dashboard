@@ -73,6 +73,7 @@ function SignIn() {
     user.token = response.data.token;
     user = JSON.stringify(user);
     setUser(user);
+    localStorage.setItem("token", response.data.token);
     localStorage.setItem("user", user);
     return history.push("/dashboard");
   };
