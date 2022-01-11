@@ -38,15 +38,12 @@ class PrintStakes extends React.Component {
     componentDidMount() {
         StakeApi.GetAllStakeSettings()
             .then(res => {
-                console.log("responze:", res)
                 this.setState({response: res.data})
             })
             .catch(err => console.log("err:", err))
     }
 
     handleSubmit = (event) => {
-        console.log(event.stake_type)
-        console.log(this.state.stakeAmount)
         StakeApi.MakeStake({
             stake_type: event.stake_type,
             stake_amount: this.state.stakeAmount
@@ -82,7 +79,7 @@ class PrintStakes extends React.Component {
                                             <label>Stake Amount</label>
                                         </td>
                                         <td>
-                                            <input onChange={this.handleStakeAmount} type="text"
+                                            <input onChange={this.handleStakeAmount} type="number"
                                                    className="form-control" required/>
                                         </td>
                                     </tr>
@@ -140,117 +137,10 @@ export default function Dashboard(props) {
             <Flex flexDirection="column" pt={{base: "120px", md: "75px"}}>
                 <SimpleGrid columns={{sm: 1, md: 2, xl: 4}} spacing="24px">
                     <TotalBalance/>
-                    <Card minH="83px">
-                        <CardBody>
-                            <Flex flexDirection="row" align="center" justify="center" w="100%">
-                                <Stat me="auto">
-                                    <StatLabel
-                                        fontSize="sm"
-                                        color="gray.400"
-                                        fontWeight="bold"
-                                        pb=".1rem"
-                                    >
-                                        Today's Users
-                                    </StatLabel>
-                                    <Flex>
-                                        <StatNumber fontSize="lg" color={textColor}>
-                                            2,300
-                                        </StatNumber>
-                                        <StatHelpText
-                                            alignSelf="flex-end"
-                                            justifySelf="flex-end"
-                                            m="0px"
-                                            color="green.400"
-                                            fontWeight="bold"
-                                            ps="3px"
-                                            fontSize="md"
-                                        >
-                                            +5%
-                                        </StatHelpText>
-                                    </Flex>
-                                </Stat>
-                                <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                                    <GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                                </IconBox>
-                            </Flex>
-                        </CardBody>
-                    </Card>
-                    <Card minH="83px">
-                        <CardBody>
-                            <Flex flexDirection="row" align="center" justify="center" w="100%">
-                                <Stat>
-                                    <StatLabel
-                                        fontSize="sm"
-                                        color="gray.400"
-                                        fontWeight="bold"
-                                        pb=".1rem"
-                                    >
-                                        New Clients
-                                    </StatLabel>
-                                    <Flex>
-                                        <StatNumber fontSize="lg" color={textColor}>
-                                            +3,020
-                                        </StatNumber>
-                                        <StatHelpText
-                                            alignSelf="flex-end"
-                                            justifySelf="flex-end"
-                                            m="0px"
-                                            color="red.500"
-                                            fontWeight="bold"
-                                            ps="3px"
-                                            fontSize="md"
-                                        >
-                                            -14%
-                                        </StatHelpText>
-                                    </Flex>
-                                </Stat>
-                                <Spacer/>
-                                <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                                    <DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                                </IconBox>
-                            </Flex>
-                        </CardBody>
-                    </Card>
-                    <Card minH="83px">
-                        <CardBody>
-                            <Flex flexDirection="row" align="center" justify="center" w="100%">
-                                <Stat me="auto">
-                                    <StatLabel
-                                        fontSize="sm"
-                                        color="gray.400"
-                                        fontWeight="bold"
-                                        pb=".1rem"
-                                    >
-                                        Total Sales
-                                    </StatLabel>
-                                    <Flex>
-                                        <StatNumber fontSize="lg" color={textColor} fontWeight="bold">
-                                            $173,000
-                                        </StatNumber>
-                                        <StatHelpText
-                                            alignSelf="flex-end"
-                                            justifySelf="flex-end"
-                                            m="0px"
-                                            color="green.400"
-                                            fontWeight="bold"
-                                            ps="3px"
-                                            fontSize="md"
-                                        >
-                                            +8%
-                                        </StatHelpText>
-                                    </Flex>
-                                </Stat>
-                                <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                                    <CartIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                                </IconBox>
-                            </Flex>
-                        </CardBody>
-                    </Card>
                 </SimpleGrid>
-
             </Flex>
-            <div className="wd_scroll_wrap">
 
+            <div className="wd_scroll_wrap">
                 <div id="tokens" className="wd_scroll">
                     <section className="tokens-area section">
                         <Container>

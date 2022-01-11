@@ -26,12 +26,12 @@ export function SidebarHelp(props) {
         Need help?
       </Text>
       <Text fontSize="xs" color="white" mb="10px">
-      Access Product Page
+      Send Email
       </Text>
       <Link
         target="_blank"
         w="100%"
-        href="https://appseed.us/product/node-js-react-purity-dashboard"
+        href=""
       >
         <Button
           fontSize="10px"
@@ -49,7 +49,7 @@ export function SidebarHelp(props) {
           }}
           color="black"
         >
-          React Chakra Purity
+          Send Email
         </Button>
       </Link>
     </Flex>

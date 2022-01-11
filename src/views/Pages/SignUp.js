@@ -28,8 +28,11 @@ function SignUp() {
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
-  const [name, setName] = useState("");
+
+  const [referenceId, setReferenceId] = useState("");
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [buttonText, setButtonText] = useState("Sign up");
   const [error, setError] = useState(undefined);
@@ -50,8 +53,10 @@ function SignUp() {
     try {
       setButtonText("Signing up");
       let response = await AuthApi.Register({
-        username: name,
+        reference_id:referenceId,
         email,
+        first_name: firstName,
+        last_name: lastName,
         password,
       });
       if (response.data && response.data.success === false) {
@@ -111,8 +116,7 @@ function SignUp() {
           mb="26px"
           w={{ base: "90%", sm: "60%", lg: "40%", xl: "30%" }}
         >
-          Use these awesome forms to login or create new account in your project
-          for free.
+          Sign Up to Helt Coin
         </Text>
       </Flex>
       <Flex alignItems="center" justifyContent="center" mb="60px" mt="20px">
@@ -126,102 +130,55 @@ function SignUp() {
           bg={bgColor}
           boxShadow="0 20px 27px 0 rgb(0 0 0 / 5%)"
         >
-          <Text
-            fontSize="xl"
-            color={textColor}
-            fontWeight="bold"
-            textAlign="center"
-            mb="22px"
-          >
-            Register With
-          </Text>
-          <HStack spacing="15px" justify="center" mb="22px">
-            <Flex
-              justify="center"
-              align="center"
-              w="75px"
-              h="75px"
-              borderRadius="15px"
-              border="1px solid lightgray"
-              cursor="pointer"
-              transition="all .25s ease"
-              _hover={{ filter: "brightness(120%)", bg: bgIcons }}
-            >
-              <Link href="#">
-                <Icon
-                  as={FaFacebook}
-                  w="30px"
-                  h="30px"
-                  _hover={{ filter: "brightness(120%)" }}
-                />
-              </Link>
-            </Flex>
-            <Flex
-              justify="center"
-              align="center"
-              w="75px"
-              h="75px"
-              borderRadius="15px"
-              border="1px solid lightgray"
-              cursor="pointer"
-              transition="all .25s ease"
-              _hover={{ filter: "brightness(120%)", bg: bgIcons }}
-            >
-              <Link href="#">
-                <Icon
-                  as={FaApple}
-                  w="30px"
-                  h="30px"
-                  _hover={{ filter: "brightness(120%)" }}
-                />
-              </Link>
-            </Flex>
-            <Flex
-              justify="center"
-              align="center"
-              w="75px"
-              h="75px"
-              borderRadius="15px"
-              border="1px solid lightgray"
-              cursor="pointer"
-              transition="all .25s ease"
-              _hover={{ filter: "brightness(120%)", bg: bgIcons }}
-            >
-              <Link href="#">
-                <Icon
-                  as={FaGoogle}
-                  w="30px"
-                  h="30px"
-                  _hover={{ filter: "brightness(120%)" }}
-                />
-              </Link>
-            </Flex>
-          </HStack>
-          <Text
-            fontSize="lg"
-            color="gray.400"
-            fontWeight="bold"
-            textAlign="center"
-            mb="22px"
-          >
-            or
-          </Text>
           <FormControl>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-              Name
+              Reference ID
             </FormLabel>
             <Input
-              fontSize="sm"
-              ms="4px"
-              borderRadius="15px"
-              type="text"
-              placeholder="Your full name"
-              mb="24px"
-              size="lg"
-              onChange={(event) => {
-                setName(event.target.value);
-                setError(undefined);
-              }}
+                borderRadius="15px"
+                mb="24px"
+                fontSize="sm"
+                type="text"
+                placeholder="Reference ID"
+                size="lg"
+                defaultValue={referenceId}
+                onChange={(event) => {
+                  setReferenceId(event.target.value);
+                  setError(undefined);
+                }}
+            />
+            <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+              First Name
+            </FormLabel>
+            <Input
+                borderRadius="15px"
+                mb="24px"
+                fontSize="sm"
+                type="text"
+                placeholder="First Name"
+                size="lg"
+                defaultValue={firstName}
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                  setError(undefined);
+                }}
+            />
+
+            <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+              Last Name
+            </FormLabel>
+            <Input
+                borderRadius="15px"
+                mb="24px"
+                fontSize="sm"
+                type="text"
+                placeholder="Last Name"
+                size="lg"
+                defaultValue={lastName}
+                onChange={(event) => {
+                  setLastName(event.target.value);
+                  setError(undefined);
+                }}
             />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Email
@@ -300,9 +257,6 @@ function SignUp() {
             maxW="100%"
             mt="0px"
           >
-            <Text color={textColor} fontWeight="medium">
-              Open-source Full-Stack Seed Project
-            </Text>
           </Flex>
         </Flex>
       </Flex>

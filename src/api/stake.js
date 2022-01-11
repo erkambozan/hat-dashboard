@@ -13,7 +13,7 @@ class StakeApi {
     }
 
     static MakeStake = (data) => {
-        return axios.post(`${base}`, data, this.getToken())
+        return axios.post(`${base}/`, data, this.getToken())
     }
 
     static getToken = () => {

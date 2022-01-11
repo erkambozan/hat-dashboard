@@ -2,12 +2,12 @@
 import Dashboard from "views/Dashboard/Dashboard.js";
 import Tables from "views/Dashboard/Tables.js";
 import Billing from "views/Dashboard/Billing.js";
-import RTLPage from "views/RTL/RTLPage.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 import SignOut from "views/Pages/SignOut.js";
 import Stake from "views/Dashboard/Stake/Stake";
+import Balance from "views/Dashboard/Balance";
 import AdminStake from "views/Dashboard/AdminStake.js";
 import AdminStakeSettings from "views/Dashboard/AdminStakeSettings.js";
 import AdminWithdrawal from "views/Dashboard/AdminWithdrawal.js";
@@ -31,6 +31,14 @@ var dashRoutes = [
         rtlName: "لوحة القيادة",
         icon: <HomeIcon color="inherit" />,
         component: Dashboard,
+        layout: "/user",
+    },
+    {
+        path: "/balance",
+        name: "Balance",
+        rtlName: "لوحة القيادة",
+        icon: <HomeIcon color="inherit" />,
+        component: Balance,
         layout: "/user",
     },
     {

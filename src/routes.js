@@ -7,6 +7,7 @@ import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 import SignOut from "views/Pages/SignOut.js";
 import Stake from "views/Dashboard/Stake/Stake";
+import Balance from "views/Dashboard/Balance";
 import UserWithdrawal from "views/Dashboard/UserWithdrawal";
 
 import {
@@ -25,6 +26,14 @@ var dashRoutes = [
         rtlName: "لوحة القيادة",
         icon: <HomeIcon color="inherit" />,
         component: Dashboard,
+        layout: "/user",
+    },
+    {
+        path: "/balance",
+        name: "Balance",
+        rtlName: "لوحة القيادة",
+        icon: <HomeIcon color="inherit" />,
+        component: Balance,
         layout: "/user",
     },
     {

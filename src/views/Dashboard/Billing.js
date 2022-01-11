@@ -200,9 +200,9 @@ function Billing() {
                                         variant="no-hover"
                                         bgColor=""
                                     >
-                                        <Text color="#799778">Add Balance</Text>
+                                        <a href={"http://localhost:3000/#/user/balance"} color="#799778">Add Balance
                                         <Icon paddingLeft="2" color="#799778" as={FaPlus}/>
-
+                                        </a>
                                     </Button>
                                 </Flex>
                             </CardBody>
