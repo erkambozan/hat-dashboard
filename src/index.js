@@ -17,28 +17,30 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import {HashRouter, Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
 
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 import RTLLayout from "layouts/RTL.js";
 
-import { ProtectedRoute } from "./layouts/ProtectedRoute";
-import { AuthProvider } from "auth-context/auth.context";
-import ControlToken from "./ControlToken";
+import {ProtectedRoute} from "./layouts/ProtectedRoute";
+import {AuthProvider} from "auth-context/auth.context";
+import {BrowserRouter} from "react-router-dom";
+
 let user = localStorage.getItem("user");
 user = JSON.parse(user);
 
 ReactDOM.render(
-  <AuthProvider userData={user}>
-    <HashRouter>
-      <Switch>
-        <Route path={`/auth`} component={AuthLayout} />
-        <ProtectedRoute path={`/user`} component={AdminLayout} />
-        {/*<ProtectedRoute path={`/rtl`} component={RTLLayout} />*/}
-        <Redirect from={`/`} to="/user/dashboard" />
-      </Switch>
-    </HashRouter>
-  </AuthProvider>,
-  document.getElementById("root")
+    <AuthProvider userData={user}>
+        <BrowserRouter basename={`/helt`}>
+            <Switch>
+                <Route path={`/auth`} component={AuthLayout}/>
+                <ProtectedRoute path={`/user`} component={AdminLayout}/>
+                {/*<ProtectedRoute path={`/rtl`} component={RTLLayout} />*/}
+                <Redirect from={`/`} to="/user/dashboard"/>
+            </Switch>
+        </BrowserRouter>
+    </AuthProvider>
+    ,
+    document.getElementById("root")
 );

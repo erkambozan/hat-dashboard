@@ -217,7 +217,7 @@ function Sidebar(props) {
   var brand = (
     <Box pt={"25px"} mb="12px">
       <Link
-        href={`${process.env.PUBLIC_URL}/#/`}
+        href={`${process.env.PUBLIC_URL}/helt/`}
         display="flex"
         lineHeight="100%"
         mb="30px"
@@ -437,7 +437,7 @@ export function SidebarResponsive(props) {
   var brand = (
     <Box pt={"35px"} mb="8px">
       <Link
-        href={`${process.env.PUBLIC_URL}/#/`}
+        href={`${process.env.PUBLIC_URL}/helt/`}
         target="_blank"
         display="flex"
         lineHeight="100%"

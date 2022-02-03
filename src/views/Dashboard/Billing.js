@@ -198,7 +198,7 @@ function Billing() {
                                         variant="no-hover"
                                         bgColor=""
                                     >
-                                        <a href={`/#/user/balance`} color="#799778">Add Balance
+                                        <a href={`/helt/user/balance`} color="#799778">Add Balance
                                             <Icon paddingLeft="2" color="#799778" as={FaPlus}/>
                                         </a>
                                     </Button>

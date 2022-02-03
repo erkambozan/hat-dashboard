@@ -79,7 +79,7 @@ export default function Dashboard() {
 
 
   function copyToClipboard(){
-    const link = `http://${Config.dashboardPath}/#/auth/signup?reference=${user.reference_id}`;
+    const link = `http://${Config.dashboardPath}/helt/auth/signup?reference=${user.reference_id}`;
     navigator.clipboard.writeText(link)
   }
   return (
