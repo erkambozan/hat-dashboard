@@ -16,22 +16,18 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import IconBox from "components/Icons/IconBox";
-import TransactionRow from "components/Tables/TransactionRow";
 import {Separator} from "components/Separator/Separator";
+import Config from '../../config';
 import React, {useEffect, useState} from "react";
 import {
     FaCoins,
     FaPlus,
-    FaRegCalendarAlt,
     FaWallet,
 } from "react-icons/fa";
 import {RiMastercardFill} from "react-icons/ri";
-import {
-    newestTransactions,
-    olderTransactions,
-} from "variables/general";
 import UserApi from "../../api/user";
 import Perm from "../../api/perm";
+import Transactions from "./Transactions";
 
 
 function Billing() {
@@ -46,6 +42,7 @@ function Billing() {
 
     const [userTotalBalance, setUserTotalBalance] = useState(0.0);
     const [user, setUser] = useState({});
+
     useEffect(() => {
         UserApi.GetTotalBalance().then(res => {
             setUserTotalBalance(res.data);
@@ -53,6 +50,7 @@ function Billing() {
 
         UserApi.GetUserDetails().then(res => {
             setUser(res.data)
+            return res.data.id
         }).catch(err => console.log("err:", err))
     }, []);
 
@@ -200,8 +198,8 @@ function Billing() {
                                         variant="no-hover"
                                         bgColor=""
                                     >
-                                        <a href={"http://localhost:3000/#/user/balance"} color="#799778">Add Balance
-                                        <Icon paddingLeft="2" color="#799778" as={FaPlus}/>
+                                        <a href={`/#/user/balance`} color="#799778">Add Balance
+                                            <Icon paddingLeft="2" color="#799778" as={FaPlus}/>
                                         </a>
                                     </Button>
                                 </Flex>
@@ -230,58 +228,12 @@ function Billing() {
                                     >
                                         Your Transactions
                                     </Text>
-                                    <Flex align="center">
-                                        <Icon
-                                            as={FaRegCalendarAlt}
-                                            color="gray.400"
-                                            fontSize="md"
-                                            me="6px"
-                                        ></Icon>
-                                        <Text color="gray.400" fontSize="sm" fontWeight="semibold">
-                                            23 - 30 March 2021
-                                        </Text>
-                                    </Flex>
                                 </Flex>
                             </Flex>
                         </CardHeader>
                         <CardBody>
                             <Flex direction="column" w="100%">
-                                <Text
-                                    color="gray.400"
-                                    fontSize={{sm: "sm", md: "md"}}
-                                    fontWeight="semibold"
-                                    my="12px"
-                                >
-                                    NEW
-                                </Text>
-                                {newestTransactions.map((row) => {
-                                    return (
-                                        <TransactionRow
-                                            name={row.name}
-                                            logo={row.logo}
-                                            date={row.date}
-                                            price={row.price}
-                                        />
-                                    );
-                                })}
-                                <Text
-                                    color="gray.400"
-                                    fontSize={{sm: "sm", md: "md"}}
-                                    fontWeight="semibold"
-                                    my="12px"
-                                >
-                                    OLDER
-                                </Text>
-                                {olderTransactions.map((row) => {
-                                    return (
-                                        <TransactionRow
-                                            name={row.name}
-                                            logo={row.logo}
-                                            date={row.date}
-                                            price={row.price}
-                                        />
-                                    );
-                                })}
+                                <Transactions id={user.id}/>
                             </Flex>
                         </CardBody>
                     </Card>

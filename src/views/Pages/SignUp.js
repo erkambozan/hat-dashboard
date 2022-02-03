@@ -19,7 +19,7 @@ import React, { useState } from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 import AuthApi from "../../api/auth";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 function SignUp() {
   const history = useHistory();
@@ -37,12 +37,15 @@ function SignUp() {
   const [buttonText, setButtonText] = useState("Sign up");
   const [error, setError] = useState(undefined);
 
+  const location = useLocation();
+  React.useEffect(() => {
+  const params = new URLSearchParams(location.search)
+  setReferenceId(params.has('reference') ? params.get('reference') : "")
+  }, [])
+
   const register = async (event) => {
     if (event) {
       event.preventDefault();
-    }
-    if (name === "") {
-      return setError("You must enter your name.");
     }
     if (email === "") {
       return setError("You must enter your email.");

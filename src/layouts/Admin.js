@@ -30,8 +30,10 @@ export default function Dashboard(props) {
 
   let routes
   if (manage){
+    console.log("manage " + manage)
     routes = routesAdmin
   }else {
+    console.log("manage " + manage)
     routes = routesUser
   }
 

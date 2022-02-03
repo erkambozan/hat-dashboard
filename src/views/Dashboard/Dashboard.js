@@ -42,13 +42,21 @@ import {
 } from "components/Icons/Icons.js";
 import DashboardTableRow from "components/Tables/DashboardTableRow";
 import TimelineRow from "components/Tables/TimelineRow";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 // react icons
 import { BsArrowRight } from "react-icons/bs";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { dashboardTableData, timelineData } from "variables/general";
+import UserApi from "../../api/user";
+import Config from "../../config";
 
 export default function Dashboard() {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    UserApi.GetUserDetails().then(res => {
+      setUser(res.data)
+    }).catch(err => console.log("err:", err))
+  }, []);
   const value = "$100.000";
   // Chakra Color Mode
   const { colorMode, toggleColorMode } = useColorMode();
@@ -69,6 +77,11 @@ export default function Dashboard() {
   ]);
   const overlayRef = React.useRef();
 
+
+  function copyToClipboard(){
+    const link = `http://${Config.dashboardPath}/#/auth/signup?reference=${user.reference_id}`;
+    navigator.clipboard.writeText(link)
+  }
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
@@ -181,9 +194,13 @@ export default function Dashboard() {
                 <Text fontSize="xl" fontWeight="bold" pb=".3rem">
                   Share and Win
                 </Text>
-                <Text fontSize="sm" fontWeight="normal" w={{ lg: "92%" }}>
-                  If you want to withdraw the token you will earn from each reference directly, invite people with your reference code.
+                <Text fontSize="sm" fontWeight="normal" pb="1%" w={{ lg: "92%" }}>
+                  Invite people with your referral code if you want to earn coins directly from every referral.
+                  You will earn 10% deposit amount coins.
                 </Text>
+                <Button backgroundColor="#4fd1c5" color="black" onClick={copyToClipboard} >
+                  Copy Invite Link
+                </Button>
                 <Spacer />
               </Flex>
             </Portal>

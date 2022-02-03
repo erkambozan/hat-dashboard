@@ -21,7 +21,11 @@ class UserApi {
     };
 
     static GetUserDetails = () => {
-        return axios.get(`/hat/admin/det`, this.getToken());
+        return axios.get(`${base}/det`, this.getToken());
+    };
+
+    static GetTransactions = (userId) => {
+        return axios.get(`${base}/transactions/${userId}`, this.getToken());
     };
 
     static getToken = () => {

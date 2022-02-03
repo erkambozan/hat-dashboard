@@ -25,9 +25,11 @@ function getConfig() {
 }
 
 const MANAGE = "manage"
+let ID
 
 export {
-    MANAGE
+    MANAGE,
+    ID
 }
 
 const baseUrl = "/hat/admin"
@@ -55,6 +57,7 @@ function setPerm(id, permissionName, permissionVar) {
 
 function userInfo() {
     return Perm.loggedUser().then(response => {
+        ID = response.id
         return response;
     })
 }
