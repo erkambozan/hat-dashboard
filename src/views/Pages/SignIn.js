@@ -148,7 +148,7 @@ function SignIn() {
                                     borderRadius="15px"
                                     mb="24px"
                                     fontSize="sm"
-                                    type="text"
+                                    type="email"
                                     placeholder="Your email adress"
                                     size="lg"
                                     defaultValue={email}

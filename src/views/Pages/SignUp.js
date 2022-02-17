@@ -13,10 +13,12 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+//Notification
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import React, { useState } from "react";
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 import AuthApi from "../../api/auth";
 import { useHistory, useLocation } from "react-router-dom";
@@ -24,10 +26,7 @@ import { useHistory, useLocation } from "react-router-dom";
 function SignUp() {
   const history = useHistory();
 
-  const titleColor = useColorModeValue("teal.300", "teal.200");
-  const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
-  const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
   const [referenceId, setReferenceId] = useState("");
   const [email, setEmail] = useState("");
@@ -36,28 +35,65 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [buttonText, setButtonText] = useState("Sign up");
   const [error, setError] = useState(undefined);
+  const [message, setMessage] = useState("");
+
 
   const location = useLocation();
   React.useEffect(() => {
-  const params = new URLSearchParams(location.search)
-  setReferenceId(params.has('reference') ? params.get('reference') : "")
+    const params = new URLSearchParams(location.search)
+    setReferenceId(params.has('reference') ? params.get('reference') : "")
   }, [])
 
   const register = async (event) => {
-    if (event) {
-      event.preventDefault();
+    const emailRegex = new RegExp(/[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g);
+    const passRegex = new RegExp("(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+    if (emailRegex.test(email)) {
+      setMessage("Email is Valid");
+      if (passRegex.test(password)) {
+        setMessage("Your account has been successfully created");
+        NotificationManager.success(message);
+        return handleSubmit();
+      }else{
+        setMessage("Password not valid")
+        NotificationManager.info(message);
+      }
+    } else if ((!emailRegex.test(email) && email !== "") && (!passRegex.test(email) && passRegex !== "")) {
+      setMessage("Email is Not Valid");
+      NotificationManager.warning(message);
+    } else {
+      NotificationManager.info(message);
     }
-    if (email === "") {
-      return setError("You must enter your email.");
+    Validate();
+    
+
+  };
+
+  const Validate= async()=>{
+    if (firstName === "") {
+      NotificationManager.info(error);
+      return setError("You must enter your first name.");
+    }
+    if (lastName === "") {
+      NotificationManager.info(error);
+      return setError("You must enter a last name.");
     }
     if (password === "") {
+      NotificationManager.info(error);
       return setError("You must enter a password.");
     }
+    if (email === "") {
+      NotificationManager.info(error);
+      return setError("You must enter a email.");
+    }
+
+  }
+
+  const handleSubmit = async () => {
     try {
       setButtonText("Signing up");
       let response = await AuthApi.Register({
-        reference_id:referenceId,
-        email,
+        reference_id: referenceId,
+        email: email,
         first_name: firstName,
         last_name: lastName,
         password,
@@ -75,7 +111,7 @@ function SignUp() {
       }
       return setError("There has been an error.");
     }
-  };
+  }
 
   return (
     <Flex
@@ -138,50 +174,50 @@ function SignUp() {
               Reference ID
             </FormLabel>
             <Input
-                borderRadius="15px"
-                mb="24px"
-                fontSize="sm"
-                type="text"
-                placeholder="Reference ID"
-                size="lg"
-                defaultValue={referenceId}
-                onChange={(event) => {
-                  setReferenceId(event.target.value);
-                  setError(undefined);
-                }}
+              borderRadius="15px"
+              mb="24px"
+              fontSize="sm"
+              type="text"
+              placeholder="Reference ID"
+              size="lg"
+              defaultValue={referenceId}
+              onChange={(event) => {
+                setReferenceId(event.target.value);
+                setError(undefined);
+              }}
             />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               First Name
             </FormLabel>
             <Input
-                borderRadius="15px"
-                mb="24px"
-                fontSize="sm"
-                type="text"
-                placeholder="First Name"
-                size="lg"
-                defaultValue={firstName}
-                onChange={(event) => {
-                  setFirstName(event.target.value);
-                  setError(undefined);
-                }}
+              borderRadius="15px"
+              mb="24px"
+              fontSize="sm"
+              type="text"
+              placeholder="First Name"
+              size="lg"
+              defaultValue={firstName}
+              onChange={(event) => {
+                setFirstName(event.target.value);
+                setError(undefined);
+              }}
             />
 
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Last Name
             </FormLabel>
             <Input
-                borderRadius="15px"
-                mb="24px"
-                fontSize="sm"
-                type="text"
-                placeholder="Last Name"
-                size="lg"
-                defaultValue={lastName}
-                onChange={(event) => {
-                  setLastName(event.target.value);
-                  setError(undefined);
-                }}
+              borderRadius="15px"
+              mb="24px"
+              fontSize="sm"
+              type="text"
+              placeholder="Last Name"
+              size="lg"
+              defaultValue={lastName}
+              onChange={(event) => {
+                setLastName(event.target.value);
+                setError(undefined);
+              }}
             />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Email
@@ -252,6 +288,7 @@ function SignUp() {
             >
               {buttonText}
             </Button>
+            <NotificationContainer />
           </FormControl>
           <Flex
             flexDirection="column"
