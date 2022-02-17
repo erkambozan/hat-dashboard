@@ -130,7 +130,7 @@ export default function Dashboard() {
                       my={{ sm: "1.5rem", lg: "0px" }}
                       _hover={{ me: "4px" }}
                     >
-                      Go To
+                      <a href="/helt/user/profile">Go To</a>
                     </Text>
                     <Icon
                       as={BsArrowRight}
@@ -246,7 +246,7 @@ export default function Dashboard() {
                       my={{ sm: "1.5rem", lg: "0px" }}
                       _hover={{ me: "4px" }}
                     >
-                      Go To
+                      <a href="/helt/user/stake">Go To</a>
                     </Text>
                     <Icon
                       as={BsArrowRight}

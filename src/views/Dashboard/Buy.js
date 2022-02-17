@@ -48,7 +48,7 @@ import {BsArrowRight} from "react-icons/bs";
 import {IoCheckmarkDoneCircleSharp} from "react-icons/io5";
 import {dashboardTableData, timelineData} from "variables/general";
 
-export default function Balance() {
+export default function Buy() {
     const value = "$100.000";
     // Chakra Color Mode
     const {colorMode, toggleColorMode} = useColorMode();

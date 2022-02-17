@@ -1,5 +1,5 @@
 {
-    "name": "purity-dashboard-react",
+    "name": "helt",
     "version": "1.0.3",
     "private": true,
     "dependencies": {
@@ -57,6 +57,7 @@
     },
     "devDependencies": {
         "@babel/plugin-transform-react-jsx-source": "^7.14.5",
+        "@babel/preset-react": "^7.16.7",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-prettier": "3.4.0",
         "gulp": "4.0.2",

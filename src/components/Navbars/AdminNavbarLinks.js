@@ -118,14 +118,13 @@ export default function HeaderLinks(props) {
           <Flex flexDirection="column">
             <MenuItem borderRadius="8px" mb="10px">
               <ItemContent
-                time="13 minutes ago"
-                info="from Alicia"
-                boldInfo="New Message"
-                aName="Alicia"
-                aSrc={avatar1}
+                time=""
+                info="There are not notifications"
+                boldInfo=""
+                aName=""
               />
             </MenuItem>
-            <MenuItem borderRadius="8px" mb="10px">
+            {/*<MenuItem borderRadius="8px" mb="10px">
               <ItemContent
                 time="2 days ago"
                 info="by Josh Henry"
@@ -142,7 +141,7 @@ export default function HeaderLinks(props) {
                 aName="Kara"
                 aSrc={avatar3}
               />
-            </MenuItem>
+            </MenuItem>*/}
           </Flex>
         </MenuList>
       </Menu>
