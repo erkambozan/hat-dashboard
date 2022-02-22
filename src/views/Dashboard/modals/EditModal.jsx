@@ -15,11 +15,7 @@ import AdminStakeApi from 'api/adminstake';
 
 export default function EditModal(props) {
 
-
-    const titleColor = useColorModeValue("teal.300", "teal.200");
-    const textColor = useColorModeValue("gray.700", "white");
     const bgColor = useColorModeValue("white", "gray.700");
-    const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
     const [expiry_stake_time, setTime] = useState(0);
     const [stake_percentage, setPercent] = useState(0);

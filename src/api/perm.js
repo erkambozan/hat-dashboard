@@ -11,7 +11,6 @@ function loggedUser(url) {
 function getData(url) {
     return axios.get(url, getConfig())
         .then((response) => {
-            console.log(response.data);
             return response.data;
         });
 }
