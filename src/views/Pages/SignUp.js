@@ -50,40 +50,33 @@ function SignUp() {
     if (emailRegex.test(email)) {
       setMessage("Email is Valid");
       if (passRegex.test(password)) {
-        setMessage("Your account has been successfully created");
-        NotificationManager.success(message);
+        NotificationManager.success("Your account has been successfully created");
         return handleSubmit();
-      }else{
-        setMessage("Password not valid")
-        NotificationManager.info(message);
+      } else {
+        NotificationManager.warning("Password is not valid. Password must contain at least one uppercase letter, one lowercase letter, one special character and number. Should not be less than 8");
       }
     } else if ((!emailRegex.test(email) && email !== "") && (!passRegex.test(email) && passRegex !== "")) {
-      setMessage("Email is Not Valid");
-      NotificationManager.warning(message);
+      NotificationManager.warning("Email is not valid");
     } else {
-      NotificationManager.info(message);
+      NotificationManager.warning("Email is not valid");
     }
     Validate();
-    
+
 
   };
 
-  const Validate= async()=>{
+  const Validate = async () => {
     if (firstName === "") {
-      NotificationManager.info(error);
-      return setError("You must enter your first name.");
+      return NotificationManager.warning("You must enter your first name.");
     }
     if (lastName === "") {
-      NotificationManager.info(error);
-      return setError("You must enter a last name.");
+      return NotificationManager.warning("You must enter a last name.");
     }
     if (password === "") {
-      NotificationManager.info(error);
-      return setError("You must enter a password.");
+      return NotificationManager.warning("You must enter a password.");
     }
     if (email === "") {
-      NotificationManager.info(error);
-      return setError("You must enter a email.");
+      return NotificationManager.warning("You must enter a email.");
     }
 
   }
