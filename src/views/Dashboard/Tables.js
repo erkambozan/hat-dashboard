@@ -11,24 +11,19 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
-import TablesProjectRow from "components/Tables/TablesProjectRow";
 import TablesTableRow from "components/Tables/TablesTableRow";
 import { tablesProjectData, tablesTableData } from "variables/general";
 import StakeApi from "api/stake";
+import StakeUserTable from "./StakeUserTable"
 
+import { useState } from "react";
+import { useEffect } from "react";
 class GetStakesByUserId extends React.Component {
   state={
       response:[]
   }
   componentDidMount(){
-      StakeApi.FindStakesByUserId()
-      .then(res=>{
-          this.setState({response:res.data})
-      })
-      .catch(err=>console.log("err:",err))
+      
   }
 
   getReady = ()=>{
@@ -62,38 +57,22 @@ class GetStakesByUserId extends React.Component {
 
 
 function Tables() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    StakeApi.FindStakesByUserId()
+      .then(res=>{
+          setData(res.data)
+      })
+      .catch(err=>console.log("err:",err))
+  })
+
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
-      <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
-        <CardHeader p="6px 0px 22px 0px">
-          <Text fontSize="xl" color={textColor} fontWeight="bold">
-            Stake Table
-          </Text>
-        </CardHeader>
-        <CardBody>
-          <Table variant="simple" color={textColor}>
-            <Thead>
-              <Tr my=".8rem" pl="0px" color="gray.400">
-                {/*<Th pl="0px" color="gray.400">*/}
-                {/*  Author*/}
-                {/*</Th>*/}
-                <Th color="gray.400">Started Stake Amount</Th>
-                <Th color="gray.400">Expiry Stake Amount</Th>
-                <Th color="gray.400">Expiry Stake Day </Th>
-                <Th color="gray.400">Stake Percentage</Th>
-                <Th color="gray.400">Start Date</Th>
-                <Th color="gray.400">End Date</Th>
-                <Th></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <GetStakesByUserId/>
-            </Tbody>
-          </Table>
-        </CardBody>
-      </Card>
+      <StakeUserTable data={data}/>
     </Flex>
   );
 }

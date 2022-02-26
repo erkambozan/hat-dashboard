@@ -10,10 +10,10 @@ body {
     overflow-x: hidden;
 }
 
-
-#stake-margin{
+#stake-margin {
     margin-bottom: 5%;
 }
+
 
 /*-- Preloader css start --*/
 
@@ -3654,7 +3654,7 @@ footer .footer-top .con ul li a:hover {
 
 .tokens-area .tokens .token-body .right-btn {
     display: inline-block;
-    margin-top:20%;
+    margin-top: 20%;
     height: 60px;
     line-height: 54px;
     padding: 0 45px;
