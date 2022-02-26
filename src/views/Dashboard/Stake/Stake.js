@@ -72,7 +72,11 @@ class PrintStakes extends React.Component {
                                     </tr>
                                     <tr>
                                         <td> Minimum Limit</td>
-                                        <td> {item.minimum_limit} HT</td>
+                                        <td> {item.minimum_limit} HAT</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Maximum Limit</td>
+                                        <td> {item.maximum_limit} HAT</td>
                                     </tr>
                                     <tr>
                                         <td>

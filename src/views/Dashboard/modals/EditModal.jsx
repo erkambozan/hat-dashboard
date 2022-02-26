@@ -21,10 +21,11 @@ export default function EditModal(props) {
     const [stake_percentage, setPercent] = useState(0);
     const [stake_type, setStake] = useState("");
     const [min_limit, setMinLim] = useState(0);
+    const [max_limit, setMaxLim] = useState(0);
 
     const [buttonText, setButtonText] = useState("Update Stake Type");
     const [error, setError] = useState(undefined);
-    const {id,expiryStakeTime, stakePercentage, stakeType, minimumLimit} = props;
+    const {id,expiryStakeTime, stakePercentage, stakeType, minimumLimit, maximumLimit} = props;
     
     const updateStakeType = (id,data)=>{
         AdminStakeApi.UpdateStakeType(id,{
@@ -32,6 +33,7 @@ export default function EditModal(props) {
             stake_percentage: stake_percentage,
             stake_type: stake_type,
             minimum_limit: min_limit,
+            maximum_limit: max_limit,
         })
         .then(res=>console.log("Guncelme yapildi:"+res))
     }
@@ -115,6 +117,23 @@ export default function EditModal(props) {
                                     defaultValue={minimumLimit}
                                     onChange={(event) => {
                                         setMinLim(event.target.value);
+                                        setError(undefined);
+                                    }}
+                                />
+                                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                                    Maximum Limit
+                                </FormLabel>
+                                <Input
+                                    fontSize="sm"
+                                    ms="4px"
+                                    borderRadius="15px"
+                                    type="number"
+                                    placeholder="Set max limit"
+                                    mb="24px"
+                                    size="lg"
+                                    defaultValue={maximumLimit}
+                                    onChange={(event) => {
+                                        setMaxLim(event.target.value);
                                         setError(undefined);
                                     }}
                                 />

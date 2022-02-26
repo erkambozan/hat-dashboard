@@ -10,9 +10,10 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import EditModal from "views/Dashboard/modals/EditModal";
-import { useState } from "react";
+import {useState} from "react";
+
 function TablesTableRowAdminStakeSettings(props) {
-    const {id,expiryStakeTime, stakePercentage, stakeType, minimumLimit} = props;
+    const {id, expiryStakeTime, stakePercentage, stakeType, minimumLimit, maximumLimit} = props;
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
@@ -20,7 +21,7 @@ function TablesTableRowAdminStakeSettings(props) {
 
     return (
         <Tr>
-           
+
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
                     {expiryStakeTime}
@@ -42,6 +43,11 @@ function TablesTableRowAdminStakeSettings(props) {
                 </Text>
             </Td>
             <Td>
+                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+                    {maximumLimit}
+                </Text>
+            </Td>
+            <Td>
                 <Button onClick={() => setModalShow(true)} p="0px" bg="transparent" variant="no-hover">
                     <Text
                         fontSize="md"
@@ -53,11 +59,12 @@ function TablesTableRowAdminStakeSettings(props) {
                     </Text>
                 </Button>
                 <EditModal expiryStakeTime={expiryStakeTime}
-                    stakePercentage={stakePercentage}
-                    stakeType={stakeType}
-                    minimumLimit={minimumLimit}
-                    id={id}
-                    show={modalShow} onHide={() => setModalShow(false)}/>
+                           stakePercentage={stakePercentage}
+                           stakeType={stakeType}
+                           minimumLimit={minimumLimit}
+                           maximumLimit={maximumLimit}
+                           id={id}
+                           show={modalShow} onHide={() => setModalShow(false)}/>
             </Td>
         </Tr>
     );

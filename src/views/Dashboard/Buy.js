@@ -74,8 +74,13 @@ export default function Buy() {
             <Card minH="83px">
                 <CardBody>
                     <Flex flexDirection="row" align="center" justify="center" w="100%">
+                        <Button as="box" h={"45px"} w={"45px"} bg={iconTeal} onClick={(e) => {
+                            e.preventDefault();
+                            window.location.href='https://commerce.coinbase.com/checkout/a06c0614-253f-4cab-a008-55ceaa4cc641';}}>
+                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                        </Button>
                         <Stat me="auto">
-                            <Flex>
+                            <Flex alignContent="center">
                                 <StatNumber fontSize="lg" color={textColor}>
                                     1.000.000 HELT
                                 </StatNumber>

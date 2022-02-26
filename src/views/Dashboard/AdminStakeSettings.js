@@ -28,7 +28,6 @@ class GetAllStakeSettings extends React.Component {
     componentDidMount() {
         StakeApi.GetAllStakeSettings()
             .then(res => {
-                console.log("response:", res)
                 this.setState({ response: res.data })
             })
             .catch(err => console.log("err:", err))
@@ -43,6 +42,7 @@ class GetAllStakeSettings extends React.Component {
                     stakePercentage={item.stake_percentage}
                     stakeType={item.stake_type}
                     minimumLimit={item.minimum_limit}
+                    maximumLimit={item.maximum_limit}
                 />
             );
         })
@@ -76,6 +76,7 @@ function AdminStakeSettings() {
                                 <Th color="gray.400">Stake Percentage</Th>
                                 <Th color="gray.400">Stake Type</Th>
                                 <Th color="gray.400">Minimum Limit</Th>
+                                <Th color="gray.400">Maximum Limit</Th>
                                 <Th>
                                     <Button onClick={() => setModalShow(true)} p="0px" bg="transparent" variant="no-hover">
                                         <Text
