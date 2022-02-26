@@ -6,7 +6,7 @@ import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 import SignOut from "views/Pages/SignOut.js";
-import Stake from "views/Dashboard/Stake/Stake";
+import Stake from "views/Dashboard/Stake";
 import Buy from "views/Dashboard/Buy";
 import AdminStake from "views/Dashboard/AdminStake.js";
 import AdminStakeSettings from "views/Dashboard/AdminStakeSettings.js";

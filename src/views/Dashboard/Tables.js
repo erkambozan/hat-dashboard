@@ -66,7 +66,7 @@ function Tables() {
           setData(res.data)
       })
       .catch(err=>console.log("err:",err))
-  })
+  },[])
 
   const textColor = useColorModeValue("gray.700", "white");
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
-export default function WithSortingComponent() {
+export default function WithSortingComponent(props) {
+  const {data} = props;
+  
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
@@ -43,9 +45,10 @@ export default function WithSortingComponent() {
       },
     ],
     rows: [
-      
+      data
     ]
   });
+  console.log(data)
 
   const badgesData = {
     columns: [
@@ -55,7 +58,7 @@ export default function WithSortingComponent() {
       ...datatable.columns,
     ],
     rows: [
-      ...datatable.rows.map((row, order) => ({
+      ...data.map((row, order) => ({
         ...row,
         badge: (
           <MDBBadge pill color='danger' className='p-1 px-2' key={order} searchvalue={order}>
