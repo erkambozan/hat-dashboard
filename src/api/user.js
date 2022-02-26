@@ -12,10 +12,6 @@ class UserApi {
         return axios.post(`${base}/withdraw`, data, this.getToken())
     }
 
-    static UpdateWithdraw = (id, data) => {
-        return axios.put(`${base}/withdraw/${id}`, data, this.getToken())
-    }
-
     static GetTotalBalance = () => {
         return axios.get(`${base}/totalbalance`, this.getToken());
     };

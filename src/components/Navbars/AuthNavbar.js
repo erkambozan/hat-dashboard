@@ -19,13 +19,25 @@ import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import routes from "routes.js";
+import routesLogin from "routesLogin.js";
+import routesUser from "routes.js";
+
 export default function AuthNavbar(props) {
   const [open, setOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
   const { logo, logoText, secondary, ...rest } = props;
+
+
+  let user = localStorage.getItem('user')
+  user = JSON.stringify(user);
+  let routes
+  if (user && user.token){
+    routes = routesUser
+  }else {
+    routes = routesLogin
+  }
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return window.location.href.indexOf(routeName) > -1 ? true : false;

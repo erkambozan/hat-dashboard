@@ -29,7 +29,6 @@ import logoChakra from "assets/svg/live-hat.svg";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import IconBox from "components/Icons/IconBox";
 import TotalBalance from "./Components/TotalBalance.js"
 // Custom icons
 import {
@@ -57,24 +56,8 @@ export default function Dashboard() {
       setUser(res.data)
     }).catch(err => console.log("err:", err))
   }, []);
-  const value = "$100.000";
   // Chakra Color Mode
-  const { colorMode, toggleColorMode } = useColorMode();
-  const iconTeal = useColorModeValue("teal.300", "teal.300");
-  const iconBoxInside = useColorModeValue("white", "white");
   const textColor = useColorModeValue("gray.700", "white");
-  const [series, setSeries] = useState([
-    {
-      type: "area",
-      name: "Mobile apps",
-      data: [190, 220, 205, 350, 370, 450, 400, 360, 210, 250, 292, 150],
-    },
-    {
-      type: "area",
-      name: "Websites",
-      data: [400, 291, 121, 117, 25, 133, 121, 211, 147, 25, 201, 203],
-    },
-  ]);
   const overlayRef = React.useRef();
 
 

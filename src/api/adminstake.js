@@ -1,18 +1,21 @@
 import axios from "axios";
 
-let base = "/hat";
+let baseUrl = "/hat/admin";
 class AdminStakeApi {
   static GetAllWithdraw = ()=>{
-    return axios.get(`${base}/admin/withdraw`,this.getToken())
+    return axios.get(`${baseUrl}/withdraw`,this.getToken())
   }
   static GetAllStakes = ()=>{
-    return axios.get(`${base}/admin/stakes`,this.getToken())
+    return axios.get(`${baseUrl}/stakes`,this.getToken())
   }
   static UpdateStakeType = (id,data)=>{
-    return axios.put(`${base}/admin/settings/${id}`,data,this.getToken())
+    return axios.put(`${baseUrl}/settings/${id}`,data,this.getToken())
   }
   static CreateStakeType = (data)=>{
-    return axios.post(`${base}/admin/settings`,data,this.getToken())
+    return axios.post(`${baseUrl}/settings`,data,this.getToken())
+  }
+  static UpdateWithdraw = (id, data) => {
+    return axios.put(`${baseUrl}/withdraw/${id}`, data, this.getToken())
   }
 
   static getToken = ()=>{

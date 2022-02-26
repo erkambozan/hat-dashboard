@@ -79,6 +79,7 @@ export default function EditModalAdminWithdrawal(props) {
                                     placeholder="Wallet Adress"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={walletAddress}
                                     onChange={(event) => {
                                         setWalletAddress(event.target.value);
                                         setError(undefined);
@@ -95,6 +96,7 @@ export default function EditModalAdminWithdrawal(props) {
                                     placeholder="Amount"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={withdrawAmount}
                                     onChange={(event) => {
                                         setWithdrawAmount(event.target.value);
                                         setError(undefined);
@@ -111,6 +113,7 @@ export default function EditModalAdminWithdrawal(props) {
                                     placeholder="Status"
                                     mb="24px"
                                     size="lg"
+                                    defaultValue={status}
                                     onChange={(event) => {
                                         setStatus(event.target.value);
                                         setError(undefined);

@@ -244,6 +244,9 @@ function SignUp() {
                 setError(undefined);
               }}
             />
+            <a>
+              Password must contain at least one uppercase letter, one lowercase letter, one special character and number. Should not be less than 8
+            </a>
             <FormControl display="flex" alignItems="center" mb="24px">
               <Switch id="remember-login" colorScheme="teal" me="10px" />
               <FormLabel htmlFor="remember-login" mb="0" fontWeight="normal">

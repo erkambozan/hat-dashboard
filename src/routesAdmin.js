@@ -42,8 +42,8 @@ var dashRoutes = [
         layout: "/user",
     },
     {
-        path: "/tables",
-        name: "Tables",
+        path: "/stake-tables",
+        name: "Stake Tables",
         rtlName: "لوحة القيادة",
         icon: <StatsIcon color="inherit" />,
         component: Tables,
@@ -120,25 +120,6 @@ var dashRoutes = [
                 secondaryNavbar: true,
                 component: Billing,
                 layout: "/user",
-            },
-            {
-                path: "/signin",
-                name: "Sign In",
-                rtlName: "لوحة القيادة",
-                icon: <DocumentIcon color="inherit" />,
-                component: SignIn,
-                layout: "/auth",
-                hide: true
-            },
-            {
-                path: "/signup",
-                name: "Sign Up",
-                rtlName: "لوحة القيادة",
-                icon: <RocketIcon color="inherit" />,
-                secondaryNavbar: true,
-                component: SignUp,
-                layout: "/auth",
-                hide: true
             },
             {
                 path: "/signout",

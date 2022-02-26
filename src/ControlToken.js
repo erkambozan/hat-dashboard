@@ -1,4 +1,3 @@
-/*
 import React from "react";
 import jwt_decode from "jwt-decode";
 
@@ -22,4 +21,4 @@ export default class ControlToken extends React.Component {
             </div>
         );
     }
-} */
+}

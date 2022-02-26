@@ -81,7 +81,7 @@ function Tables() {
                 {/*</Th>*/}
                 <Th color="gray.400">Started Stake Amount</Th>
                 <Th color="gray.400">Expiry Stake Amount</Th>
-                <Th color="gray.400">Expiry Stake Time</Th>
+                <Th color="gray.400">Expiry Stake Day </Th>
                 <Th color="gray.400">Stake Percentage</Th>
                 <Th color="gray.400">Start Date</Th>
                 <Th color="gray.400">End Date</Th>
