@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // Chakra imports
 import {
     Box,
@@ -16,18 +16,23 @@ import {
 // Assets
 import signInImage from "assets/img/signin-background.jpg";
 
-import {useAuth} from "../../auth-context/auth.context";
+
+//Notification
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
+import { useAuth } from "../../auth-context/auth.context";
 import AuthApi from "../../api/auth";
 
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function SignIn() {
     // Chakra color mode
     const titleColor = useColorModeValue("teal.300", "teal.200");
     const textColor = useColorModeValue("gray.400", "white");
     const history = useHistory();
-    const {setUser} = useAuth();
-    const {user} = useAuth();
+    const { setUser } = useAuth();
+    const { user } = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -55,13 +60,14 @@ function SignIn() {
             });
             if (response.data && response.data.success === false) {
                 setButtonText("Sign in");
-                return setError(response.data.msg);
+                return setError( response.data.msg);
             }
             return setProfile(response);
         } catch (err) {
             console.log(err);
             setButtonText("Sign in");
             if (err.response) {
+                NotificationManager.error("Your password or email is incorrect. Plaese try again.");
                 return setError(err.response.data.msg);
             }
             return setError("There has been an error.");
@@ -69,7 +75,7 @@ function SignIn() {
     };
 
     const setProfile = async (response) => {
-        let user = {...response.data.user};
+        let user = { ...response.data.user };
         user.token = response.data.token;
         user = JSON.stringify(user);
         setUser(user);
@@ -81,26 +87,26 @@ function SignIn() {
     return (
         <Flex position="relative" mb="40px">
             <Flex
-                h={{sm: "initial", md: "75vh", lg: "85vh"}}
+                h={{ sm: "initial", md: "75vh", lg: "85vh" }}
                 w="100%"
                 maxW="1044px"
                 mx="auto"
                 justifyContent="space-between"
                 mb="30px"
-                pt={{sm: "100px", md: "0px"}}
+                pt={{ sm: "100px", md: "0px" }}
             >
                 <Flex
                     alignItems="center"
                     justifyContent="start"
-                    style={{userSelect: "none"}}
-                    w={{base: "100%", md: "50%", lg: "42%"}}
+                    style={{ userSelect: "none" }}
+                    w={{ base: "100%", md: "50%", lg: "42%" }}
                 >
                     {user && user.token ?
                         <div>
                             <Heading color={titleColor} fontSize="32px" mt="10px" mb="10px">
                                 Welcome Back
                             </Heading>
-                            <h3 style={{textAlign: "center"}}>You are already signed in.</h3>
+                            <h3 style={{ textAlign: "center" }}>You are already signed in.</h3>
                             <Button
                                 fontSize="15px"
                                 type="submit"
@@ -126,7 +132,7 @@ function SignIn() {
                             w="100%"
                             background="transparent"
                             p="48px"
-                            mt={{md: "150px", lg: "80px"}}
+                            mt={{ md: "150px", lg: "80px" }}
                         >
                             <Heading color={titleColor} fontSize="32px" mt="10px" mb="10px">
                                 Welcome Back
@@ -174,7 +180,7 @@ function SignIn() {
                                     }}
                                 />
                                 <FormControl display="flex" alignItems="center">
-                                    <Switch id="remember-login" colorScheme="teal" me="10px"/>
+                                    <Switch id="remember-login" colorScheme="teal" me="10px" />
                                     <FormLabel
                                         htmlFor="remember-login"
                                         mb="1"
@@ -214,6 +220,7 @@ function SignIn() {
                                 >
                                     {buttonText}
                                 </Button>
+                                <NotificationContainer />
                             </FormControl>
                             <Flex
                                 flexDirection="column"
@@ -227,7 +234,7 @@ function SignIn() {
                     }
                 </Flex>
                 <Box
-                    display={{base: "none", md: "block"}}
+                    display={{ base: "none", md: "block" }}
                     overflowX="hidden"
                     h="100%"
                     w="40vw"

@@ -26,11 +26,9 @@ class GetStakesByUserId extends React.Component {
   componentDidMount(){
       StakeApi.FindStakesByUserId()
       .then(res=>{
-          console.log("response:",res)
           this.setState({response:res.data})
       })
       .catch(err=>console.log("err:",err))
-      console.log("fjdskl")       
   }
 
   getReady = ()=>{
