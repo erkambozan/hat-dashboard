@@ -1,8 +1,8 @@
 import React from 'react';
-import { MDBDataTableV5, MDBBadge } from 'mdbreact';
+import { MDBDataTableV5, MDBCloseIcon } from 'mdbreact';
 
 export default function WithSortingComponent(props) {
-  const {data, dataColumns} = props;
+  const {data, dataColumns, deleteEarnWithdraw} = props;
   
   const [datatable, setDatatable] = React.useState({
     columns: [
@@ -24,12 +24,13 @@ export default function WithSortingComponent(props) {
       ...data.map((row, order) => ({
         ...row,
         badge: (
-          <MDBBadge pill color='danger' className='p-1 px-2' key={order} searchvalue={order}>
-          </MDBBadge>
+              <MDBCloseIcon bg="red" marginRight="10px" onClick={() => deleteEarnWithdraw(row.id)}>
+              </MDBCloseIcon>
         ),
       })),
+
     ],
   };
 
-  return <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={badgesData} sortRows={['badge']} />;
+  return <MDBDataTableV5 bgColor="white" hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={badgesData} sortRows={['badge']} />;
 }

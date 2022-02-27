@@ -4,7 +4,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import StakeApi from "api/stake";
-import Table from "./Table";
+import Table from "./modals/UserTable";
 
 import { useState } from "react";
 import { useEffect } from "react";

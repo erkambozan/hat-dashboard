@@ -9,7 +9,7 @@ import {
 
     useColorModeValue,
 } from "@chakra-ui/react";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import EarnApi from 'api/earns';
 
 //Notification
@@ -26,7 +26,7 @@ export default function AddModal(props) {
     const [withdraw_address, setWithdrawAddress] = useState("");
     const [withdraw_amount, setWithdrawAmount] = useState(0);
     const [coin_type, setCoinType] = useState("LTC");
-    const [coin_price, setCoinPrice] = useState(0);
+    const [coin_price, setCoinPrice] = useState(1);
 
 
     const [buttonText, setButtonText] = useState("Create Earn Withdraw");
@@ -35,6 +35,8 @@ export default function AddModal(props) {
     const CreateEarnWithdrawType = () => {
         if (withdraw_address === "") {
             NotificationManager.error("Please fill in the blanks.");
+        }else if(withdraw_amount <= 50){
+            NotificationManager.error("Withdraw amount should be bigger than 50 USD.");
         }
 
         EarnApi.CreateEarnWithdraw({

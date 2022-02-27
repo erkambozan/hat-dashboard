@@ -16,7 +16,6 @@ class GetAllWithdraws extends React.Component {
     componentDidMount() {
         AdminStake.GetAllWithdraw()
             .then(res => {
-                console.log(res)
                 this.setState({ response: res.data })
             })
             .catch()

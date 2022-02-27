@@ -22,6 +22,7 @@ import {
 } from "components/Icons/Icons";
 import {SlackLogo} from "./components/Icons/Icons";
 import UserWithdrawal from "./views/Dashboard/UserWithdrawal";
+import AdminEarnTable from "./views/Dashboard/AdminEarnTable";
 
 var dashRoutes = [
     {
@@ -96,12 +97,21 @@ var dashRoutes = [
                 component: AdminStakeSettings,
                 layout: "/user",
             },
+
     {
         path: "/admin-all-withdraws",
         name: "Admin All Withdraws",
         rtlName: "لوحة القيادة",
         icon: <SlackLogo color="inherit" />,
         component: AdminWithdrawal,
+        layout: "/user",
+    },
+    {
+        path: "/admin-earn-table",
+        name: "Admin Earn Table",
+        rtlName: "لوحة القيادة",
+        icon: <SlackLogo color="inherit" />,
+        component: AdminEarnTable,
         layout: "/user",
     },
 
