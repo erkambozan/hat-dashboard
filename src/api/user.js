@@ -24,6 +24,10 @@ class UserApi {
         return axios.get(`${base}/transactions/${userId}`, this.getToken());
     };
 
+    static GetUserReferenceCount = () => {
+        return axios.get(`${base}/referenceCount`, this.getToken());
+    };
+
     static getToken = () => {
         return {
             headers: {

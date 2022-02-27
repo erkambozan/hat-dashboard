@@ -12,87 +12,119 @@ export default function TotalBalance() {
     const iconBoxInside = useColorModeValue("white", "white");
     const textColor = useColorModeValue("gray.700", "white");
 
-    const [userTotalBalance, setUserTotalBalance] = useState({withdrawable_balance: 0.0, locked_balance: 0.0, earn_balance:0.0});
+    const [userTotalBalance, setUserTotalBalance] = useState({
+        withdrawable_balance: 0.0,
+        locked_balance: 0.0,
+        earn_balance: 0.0
+    });
+    const [referenceCount, setReferenceCount] = useState(0)
     useEffect(() => {
         UserApi.GetTotalBalance().then(res => {
             setUserTotalBalance(res.data);
+        }).catch(err => console.log("err:", err))
+        UserApi.GetUserReferenceCount().then(res => {
+            setReferenceCount(res.data);
         }).catch(err => console.log("err:", err))
     }, []);
 
     return (
         <>
-        <Card minH="83px">
-            <CardBody>
-                <Flex flexDirection="row" align="center" justify="center" w="100%">
-                    <Stat me="auto">
-                        <StatLabel
-                            fontSize="sm"
-                            color="gray.400"
-                            fontWeight="bold"
-                            pb=".1rem"
-                        >
-                            Total Balance
-                        </StatLabel>
-                        <Flex>
-                            <StatNumber fontSize="lg" color={textColor}>
-                                {userTotalBalance.withdrawable_balance}
-                            </StatNumber>
-                        </Flex>
-                    </Stat>
-                    <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                        <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                    </IconBox>
-                </Flex>
-            </CardBody>
-        </Card>
-    <Card minH="83px">
-        <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-                <Stat me="auto">
-                    <StatLabel
-                        fontSize="sm"
-                        color="gray.400"
-                        fontWeight="bold"
-                        pb=".1rem"
-                    >
-                        Locked Balance
-                    </StatLabel>
-                    <Flex>
-                        <StatNumber fontSize="lg" color={textColor}>
-                            {userTotalBalance.locked_balance}
-                        </StatNumber>
+            <Card minH="83px">
+                <CardBody>
+                    <Flex flexDirection="row" align="center" justify="center" w="100%">
+                        <Stat me="auto">
+                            <StatLabel
+                                fontSize="sm"
+                                color="gray.400"
+                                fontWeight="bold"
+                                pb=".1rem"
+                            >
+                                Total Balance
+                            </StatLabel>
+                            <Flex>
+                                <StatNumber fontSize="lg" color={textColor}>
+                                    {userTotalBalance.withdrawable_balance}
+                                </StatNumber>
+                            </Flex>
+                        </Stat>
+                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                        </IconBox>
                     </Flex>
-                </Stat>
-                <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                    <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                </IconBox>
-            </Flex>
-        </CardBody>
-    </Card>
-    <Card minH="83px">
-        <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-                <Stat me="auto">
-                    <StatLabel
-                        fontSize="sm"
-                        color="gray.400"
-                        fontWeight="bold"
-                        pb=".1rem"
-                    >
-                        Earn Balance
-                    </StatLabel>
-                    <Flex>
-                        <StatNumber fontSize="lg" color={textColor}>
-                            {userTotalBalance.earn_balance}
-                        </StatNumber>
+                </CardBody>
+            </Card>
+            <Card minH="83px">
+                <CardBody>
+                    <Flex flexDirection="row" align="center" justify="center" w="100%">
+                        <Stat me="auto">
+                            <StatLabel
+                                fontSize="sm"
+                                color="gray.400"
+                                fontWeight="bold"
+                                pb=".1rem"
+                            >
+                                Locked Balance
+                            </StatLabel>
+                            <Flex>
+                                <StatNumber fontSize="lg" color={textColor}>
+                                    {userTotalBalance.locked_balance}
+                                </StatNumber>
+                            </Flex>
+                        </Stat>
+                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                        </IconBox>
                     </Flex>
-                </Stat>
-                <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                    <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                </IconBox>
-            </Flex>
-        </CardBody>
-    </Card>
-    </>
-)
+                </CardBody>
+            </Card>
+            <Card minH="83px">
+                <CardBody>
+                    <Flex flexDirection="row" align="center" justify="center" w="100%">
+                        <Stat me="auto">
+                            <StatLabel
+                                fontSize="sm"
+                                color="gray.400"
+                                fontWeight="bold"
+                                pb=".1rem"
+                            >
+                                Earn Balance
+                            </StatLabel>
+                            <Flex>
+                                <StatNumber fontSize="lg" color={textColor}>
+                                    {userTotalBalance.earn_balance}
+                                </StatNumber>
+                            </Flex>
+                        </Stat>
+                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                        </IconBox>
+                    </Flex>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <Flex flexDirection="row" align="center" justify="center" w="100%">
+                        <Stat me="auto">
+                            <StatLabel
+                                fontSize="sm"
+                                color="gray.400"
+                                fontWeight="bold"
+                                pb=".1rem"
+                            >
+                                Reference
+                            </StatLabel>
+                            <Flex>
+                                <StatNumber fontSize="lg" color={textColor}>
+                                    {referenceCount}
+                                </StatNumber>
+                            </Flex>
+                        </Stat>
+                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                        </IconBox>
+                    </Flex>
+                </CardBody>
+            </Card>
+        </>
+    )
 }
