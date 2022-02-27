@@ -1,6 +1,6 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard.js";
-import Tables from "views/Dashboard/Tables.js";
+import StakeUserTable from "views/Dashboard/StakeUserTable.js";
 import Billing from "views/Dashboard/Billing.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
@@ -18,6 +18,7 @@ import {
     DocumentIcon,
     RocketIcon,
 } from "components/Icons/Icons";
+import EarnUserTable from "./views/Dashboard/EarnUserTable";
 
 var dashRoutes = [
     {
@@ -41,7 +42,15 @@ var dashRoutes = [
         name: "Stake Tables",
         rtlName: "لوحة القيادة",
         icon: <StatsIcon color="inherit" />,
-        component: Tables,
+        component: StakeUserTable,
+        layout: "/user",
+    },
+    {
+        path: "/earns",
+        name: "Earns",
+        rtlName: "لوحة القيادة",
+        icon: <StatsIcon color="inherit" />,
+        component: EarnUserTable,
         layout: "/user",
     },
     /*{

@@ -1,3 +1,4 @@
 export default {
-    dashboardPath: "user.heltcoin.io"
+    dashboardPath: "user.heltcoin.io",
+    heltPrice: 0.003
 }

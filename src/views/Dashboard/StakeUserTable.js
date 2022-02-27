@@ -1,72 +1,73 @@
-import React from 'react';
-import { MDBDataTableV5, MDBBadge } from 'mdbreact';
+import React from "react";
+// Chakra imports
+import {
+  Flex,
+} from "@chakra-ui/react";
+import StakeApi from "api/stake";
+import Table from "./Table";
 
-export default function WithSortingComponent(props) {
-  const {data} = props;
-  
-  const [datatable, setDatatable] = React.useState({
-    columns: [
-      {
-        label: 'Started Stake Amount',
-        field: 'name',
-        width: 150,
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Name',
+import { useState } from "react";
+import { useEffect } from "react";
+
+function StakeUserTable() {
+
+    const [columns, setColumns] = useState([
+        {
+            label: 'Started Stake Amount',
+            field: 'started_stake_amount',
+            width: 150,
         },
-      },
-      {
-        label: 'Expiry Stake Amount',
-        field: 'position',
-        width: 270,
-      },
-      {
-        label: 'Expiry Stake Day ',
-        field: 'office',
-        width: 200,
-      },
-      {
-        label: 'Stake PercentageStake Percentage',
-        field: 'age',
-        sort: 'asc',
-        width: 100,
-      },
-      {
-        label: 'Start date',
-        field: 'date',
-        sort: 'disabled',
-        width: 150,
-      },
-      {
-        label: 'End Date',
-        field: 'salary',
-        sort: 'disabled',
-        width: 100,
-      },
-    ],
-    rows: [
-      data
-    ]
-  });
-  console.log(data)
+        {
+            label: 'Expiry Stake Amount',
+            field: 'expiry_stake_amount',
+            width: 270,
+        },
+        {
+            label: 'Expiry Stake Day ',
+            field: 'expiry_stake_time',
+            width: 200,
+        },
+        {
+            label: 'Stake Percentage',
+            field: 'stake_percentage',
+            width: 100,
+        },
+        {
+            label: 'Start date',
+            field: 'start_date',
+            sort: 'disabled',
+            width: 150,
+        },
+        {
+            label: 'End Date',
+            field: 'end_date',
+            sort: 'disabled',
+            width: 100,
+        },
+    ])
 
-  const badgesData = {
-    columns: [
-      {
-        field: 'badge',
-      },
-      ...datatable.columns,
-    ],
-    rows: [
-      ...data.map((row, order) => ({
-        ...row,
-        badge: (
-          <MDBBadge pill color='danger' className='p-1 px-2' key={order} searchvalue={order}>
-          </MDBBadge>
-        ),
-      })),
-    ],
-  };
+  const [data, setData] = useState([{
+      started_stake_amount: "",
+      expiry_stake_amount: "",
+      expiry_stake_time: "",
+      stake_percentage: "",
+      start_date: "",
+      end_date: ""
+  }]);
 
-  return <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={badgesData} sortRows={['badge']} />;
+  useEffect(() => {
+    StakeApi.FindStakesByUserId()
+      .then(res=>{
+          setData(res.data)
+      })
+      .catch(err=>console.log("err:",err))
+  },[])
+
+  return (
+    <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+      <Table data={data} dataColumns={columns}/>
+    </Flex>
+  );
 }
+
+export default StakeUserTable;

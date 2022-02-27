@@ -1,10 +1,9 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard.js";
-import Tables from "views/Dashboard/Tables.js";
+import StakeUserTable from "views/Dashboard/StakeUserTable.js";
+import EarnUserTable from "views/Dashboard/EarnUserTable.js";
 import Billing from "views/Dashboard/Billing.js";
 import Profile from "views/Dashboard/Profile.js";
-import SignIn from "views/Pages/SignIn.js";
-import SignUp from "views/Pages/SignUp.js";
 import SignOut from "views/Pages/SignOut.js";
 import Stake from "views/Dashboard/Stake";
 import Buy from "views/Dashboard/Buy";
@@ -46,7 +45,15 @@ var dashRoutes = [
         name: "Stake Tables",
         rtlName: "لوحة القيادة",
         icon: <StatsIcon color="inherit" />,
-        component: Tables,
+        component: StakeUserTable,
+        layout: "/user",
+    },
+    {
+        path: "/earns",
+        name: "Earns",
+        rtlName: "لوحة القيادة",
+        icon: <StatsIcon color="inherit" />,
+        component: EarnUserTable,
         layout: "/user",
     },
    /* {
