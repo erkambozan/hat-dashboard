@@ -2,7 +2,7 @@ import React from "react";
 // Chakra imports
 import {
     Button,
-    Flex, Input, SimpleGrid, Stat, StatNumber, Text, Th, useColorModeValue,
+    Flex, Input, SimpleGrid, Text, Th, useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
 import EarnApi from "api/earns";
@@ -12,9 +12,9 @@ import {useState} from "react";
 import {useEffect} from "react";
 import Card from "../../components/Card/Card";
 import CardBody from "../../components/Card/CardBody";
-import {ChevronDoubleRightIcon, UserRemoveIcon} from "@heroicons/react/solid";
+import {ChevronDoubleRightIcon} from "@heroicons/react/solid";
 import Config from "../../config";
-import AddModal from "./modals/AddModal";
+import MoveEarnToWithdrawModal from "./modals/MoveEarnToWithdrawModal";
 import AddEarnWithdrawModal from "./modals/AddEarnWithdrawModal";
 import TotalBalance from "./Components/TotalBalance";
 import {NotificationManager} from "react-notifications";
@@ -55,7 +55,7 @@ function EarnUserTable() {
         },
     ]
 
-    function deleteEarnWithdraw(id){
+    function deleteEarnWithdraw(id) {
         EarnApi.DeleteEarnById(id)
             .then(() => {
                 NotificationManager.success("Earn Withdraw deleted");
@@ -79,6 +79,8 @@ function EarnUserTable() {
     const [earnAmount, setEarnAmount] = useState(0)
     const [multiplyAmount, setMultiplyAmount] = useState(0)
     const [modalShow, setModalShow] = useState(false);
+    const [moveModalShow, setMoveModalShow] = useState(false);
+    const [moveAmount, setMoveAmount] = useState(0)
     const heltPrice = Config.heltPrice
 
     useEffect(() => {
@@ -98,13 +100,61 @@ function EarnUserTable() {
         setAmount(event.target.value)
     }
 
+    function handleChangeMoveAmount(event) {
+        console.log(event.target.value)
+        setMoveAmount(event.target.value)
+    }
+
+    function exchangeEarnBalanceToWithdrawBalance() {
+        EarnApi.ExchangeEarnBalanceToWithdrawBalance({
+            amount: moveAmount
+        }).then(() => {
+            NotificationManager.success("Earn Balance successfully moved to Withdraw Balance");
+            setMoveModalShow(false);
+        }).catch(err => {
+            console.log(err)
+            NotificationManager.error("Earn Balance didn't moved to Withdraw Balance an error occurred");
+            setMoveModalShow(false)
+        })
+    }
+
     return (
         <Flex direction="column" pt={{base: "120px", md: "75px"}} marginLeft="10%" marginRight="10%">
-            <SimpleGrid columns={{sm: 1, md: 2, xl: 4}} spacing="24px" marginBottom="24px">
+            <SimpleGrid columns={{sm: 1, md: 2, xl: 4}} spacing="24px">
                 <TotalBalance/>
             </SimpleGrid>
+
+            <Flex direction="column" pt={{base: "50px", md: "24px"}} marginLeft="20%" marginRight="20%" marginBottom="24px">
+                <Flex>
+                    <Card minHeight="200px" justifyContent="center">
+
+                        <Flex marginBottom="10%">
+                            <Text fontWeight="Bold" fontSize="18px">Earn Balance to Withdraw Balance</Text>
+                        </Flex>
+                        <CardBody>
+                            <Flex direction="column" marginLeft="20%">
+                                <Text align="start">
+                                    Earn Amount
+                                </Text>
+                                <Input type="number" onChange={handleChangeMoveAmount}/>
+                            </Flex>
+                            <Card alignItems="center" maxWidth="25%">
+                                <Button w="120px" bg={iconTeal} onClick={() => setMoveModalShow(true)}>
+                                    Move
+                                </Button>
+                                <MoveEarnToWithdrawModal yesButton={exchangeEarnBalanceToWithdrawBalance} show={moveModalShow}
+                                                         onHide={() => setMoveModalShow(false)}/>
+                            </Card>
+                        </CardBody>
+                    </Card>
+                </Flex>
+            </Flex>
+
             <Flex>
                 <Card minHeight="300px" justifyContent="center">
+                    <Flex marginBottom="10%">
+                        <Text fontWeight="Bold"  fontSize="18px">Earn Balance to USD and Withdraw</Text>
+                    </Flex>
                     <CardBody>
                         <Flex direction="column" marginLeft="20%">
                             <Text>
@@ -134,8 +184,8 @@ function EarnUserTable() {
                                               onHide={() => setModalShow(false)}/>
                     </Flex>
                 </Card>
-
             </Flex>
+
             <Flex direction="column" pt={{base: "24px"}}>
                 <Table data={data} dataColumns={columns} deleteEarnWithdraw={deleteEarnWithdraw}/>
             </Flex>

@@ -32,7 +32,7 @@ export default function WithSortingComponent(props) {
         ...row,
         badge: (
             <Flex>
-              <Button bg="red" marginRight="10px" onClick={() => deleteEarnWithdraw(id)}>
+              <Button bg="red" marginRight="10px" onClick={() => deleteEarnWithdraw(row.id)}>
                 <Text> x </Text>
               </Button>
               <Button onClick={() => setModalShow(true)}>

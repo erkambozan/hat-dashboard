@@ -39,7 +39,7 @@ export default function TotalBalance() {
                                 fontWeight="bold"
                                 pb=".1rem"
                             >
-                                Total Balance
+                                Withdrawal Balance HELT
                             </StatLabel>
                             <Flex>
                                 <StatNumber fontSize="lg" color={textColor}>
@@ -63,7 +63,7 @@ export default function TotalBalance() {
                                 fontWeight="bold"
                                 pb=".1rem"
                             >
-                                Locked Balance
+                                Locked Balance HELT
                             </StatLabel>
                             <Flex>
                                 <StatNumber fontSize="lg" color={textColor}>
@@ -87,7 +87,7 @@ export default function TotalBalance() {
                                 fontWeight="bold"
                                 pb=".1rem"
                             >
-                                Earn Balance
+                                Earn Balance HELT
                             </StatLabel>
                             <Flex>
                                 <StatNumber fontSize="lg" color={textColor}>

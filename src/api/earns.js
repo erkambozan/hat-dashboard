@@ -13,6 +13,10 @@ class EarnApi {
         return axios.post(`${base}/withdrawearn/`, data, this.getToken())
     }
 
+    static ExchangeEarnBalanceToWithdrawBalance = (data) => {
+        return axios.post(`${base}/earntowithdraw/`, data, this.getToken())
+    }
+
     static DeleteEarnById = (id) => {
         return axios.delete(`${base}/earnwithdraw/${id}`, this.getToken())
     }
