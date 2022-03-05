@@ -1,10 +1,11 @@
 import CardBody from "../../../components/Card/CardBody";
-import {Flex, Stat, StatHelpText, StatLabel, StatNumber, useColorMode, useColorModeValue} from "@chakra-ui/react";
+import {Button, Flex, Stat, StatHelpText, StatLabel, StatNumber, useColorMode, useColorModeValue} from "@chakra-ui/react";
 import IconBox from "../../../components/Icons/IconBox";
 import {WalletIcon} from "../../../components/Icons/Icons";
 import Card from "../../../components/Card/Card";
 import React, {useEffect, useState} from "react";
 import UserApi from "../../../api/user";
+import { useHistory } from "react-router-dom";
 
 export default function TotalBalance() {
     // Chakra Color Mode
@@ -26,6 +27,12 @@ export default function TotalBalance() {
             setReferenceCount(res.data);
         }).catch(err => console.log("err:", err))
     }, []);
+
+    function redirectEarn(){
+        let path = `/helt/user/earn`;
+        let history = useHistory();
+        history.push(path);
+    }
 
     return (
         <>
@@ -95,9 +102,11 @@ export default function TotalBalance() {
                                 </StatNumber>
                             </Flex>
                         </Stat>
-                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                        <Button as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <a href="/helt/user/earns">
                             <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                        </IconBox>
+                            </a>
+                        </Button>
                     </Flex>
                 </CardBody>
             </Card>
@@ -111,7 +120,7 @@ export default function TotalBalance() {
                                 fontWeight="bold"
                                 pb=".1rem"
                             >
-                                Reference
+                                References
                             </StatLabel>
                             <Flex>
                                 <StatNumber fontSize="lg" color={textColor}>

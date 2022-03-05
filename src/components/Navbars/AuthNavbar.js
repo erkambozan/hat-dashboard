@@ -15,6 +15,7 @@ import {
   PersonIcon,
   RocketIcon,
 } from "components/Icons/Icons";
+import HLOGO from "../../assets/img/H.png"
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import PropTypes from "prop-types";
 import React from "react";
@@ -90,7 +91,7 @@ export default function AuthNavbar(props) {
       alignItems="center"
       color={mainText}
     >
-      <CreativeTimLogo w="32px" h="32px" me="10px" />
+      <img src={HLOGO}  alt={""}/>
       <Text fontsize="sm" mt="3px">
         {logoText}
       </Text>

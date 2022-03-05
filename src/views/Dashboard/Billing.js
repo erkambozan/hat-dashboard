@@ -40,7 +40,11 @@ function Billing() {
         "gray.800"
     );
 
-    const [userTotalBalance, setUserTotalBalance] = useState(0.0);
+    const [userTotalBalance, setUserTotalBalance] = useState({
+        withdrawable_balance: 0.0,
+        locked_balance: 0.0,
+        earn_balance: 0.0
+    });
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -104,9 +108,9 @@ function Billing() {
                                         </Box>
                                         <Flex mt="14px">
                                             <Flex direction="column">
-                                                <Text fontSize="xs">Total Balance</Text>
+                                                <Text fontSize="xs">Withdrawal Balance</Text>
                                                 <Text fontSize="xs" fontWeight="bold">
-                                                    {userTotalBalance}
+                                                    {userTotalBalance.withdrawable_balance}
                                                 </Text>
                                             </Flex>
                                         </Flex>
@@ -134,7 +138,7 @@ function Billing() {
                                         w="100%"
                                     >
                                         <Text fontSize="md" color={textColor} fontWeight="bold">
-                                            Total Balance
+                                            Withdrawal Balance
                                         </Text>
                                         <Text
                                             mb="24px"
@@ -147,7 +151,7 @@ function Billing() {
                                         <Separator/>
                                     </Flex>
                                     <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                        {userTotalBalance}
+                                        {userTotalBalance.withdrawable_balance}
                                     </Text>
                                 </Flex>
                             </CardBody>
