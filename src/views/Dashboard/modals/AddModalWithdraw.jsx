@@ -15,6 +15,7 @@ import UserApi from 'api/user';
 //Notification
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {Text} from "@chakra-ui/layout";
 
 export default function AddModalWithdraw(props) {
 
@@ -27,6 +28,8 @@ export default function AddModalWithdraw(props) {
     const CreateWithdraw = () => {
         if (walletAddress == "" || withdrawAmount == 0) {
             NotificationManager.warning("Please fill in all required fields.")
+        }else if (withdrawAmount < 20000){
+            NotificationManager.error("Withdraw amount cannot less than 20.000 HELT")
         }
         else {
             UserApi.CreateWithdraw({
@@ -101,6 +104,9 @@ export default function AddModalWithdraw(props) {
                                             setError(undefined);
                                         }}
                                     />
+                                    <Text fontSize="xs">
+                                        Minimum Withdraw Limit 20.000 HELT
+                                    </Text>
 
                                     <h4
                                         style={{

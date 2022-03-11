@@ -2,7 +2,7 @@ import React from 'react';
 import { MDBDataTableV5, MDBCloseIcon } from 'mdbreact';
 
 export default function WithSortingComponent(props) {
-  const {data, dataColumns, deleteEarnWithdraw} = props;
+  const {data, dataColumns, deleteFunction} = props;
   
   const [datatable, setDatatable] = React.useState({
     columns: [
@@ -24,7 +24,7 @@ export default function WithSortingComponent(props) {
       ...data.map((row, order) => ({
         ...row,
         badge: (
-              <MDBCloseIcon bg="red" marginRight="10px" onClick={() => deleteEarnWithdraw(row.id)}>
+              <MDBCloseIcon bg="red" marginRight="10px" onClick={() => deleteFunction(row.id)}>
               </MDBCloseIcon>
         ),
       })),

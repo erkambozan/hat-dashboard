@@ -1,17 +1,17 @@
 
 import {Modal } from 'react-bootstrap';
 import {
-    Box,
     Flex,
     FormControl,
     FormLabel,
     Button,
     Input,
-
     useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import UserApi from "../../../api/user";
+import {NotificationManager} from "react-notifications";
+import AdminStakeApi from "../../../api/adminstake";
 
 export default function EditModalAdminWithdrawal(props) {
 
@@ -30,11 +30,17 @@ export default function EditModalAdminWithdrawal(props) {
     const {id,walletAddress, withdrawAmount, status} = props;
 
     const updateWithdraw = ()=>{
-        UserApi.UpdateWithdraw(props.id, {
-            wallet_address: wallet_address,
-            withdraw_amount: withdraw_amount,
-            status: status_withdraw,
-        }).then(() => props.onHide)
+        AdminStakeApi.UpdateWithdraw(id, {
+            wallet_address: walletAddress,
+            withdraw_amount: withdrawAmount,
+            status: status_withdraw
+        }).then(() => {
+            NotificationManager.success("Withdraw updated")
+            props.onHide()
+        }).catch(() => {
+            NotificationManager.error("Withdraw didn't update")
+            props.onHide()
+        })
     }
 
     return (
@@ -55,20 +61,18 @@ export default function EditModalAdminWithdrawal(props) {
 
                     <Flex alignItems="center" justifyContent="center" mb="60px" mt="20px">
                         <Flex
-                            direction="column"
-                            w="445px"
-                            background="transparent"
-                            borderRadius="15px"
-                            p="40px"
-                            mx={{ base: "100px" }}
-                            bg={bgColor}
-                            boxShadow="0 20px 27px 0 rgb(0 0 0 / 5%)"
-                        >
+                                direction="column"
+                                w="445px"
+                                background="transparent"
+                                borderRadius="15px"
+                                p="40px"
+                                mx={{ base: "100px" }}
+                                bg={bgColor}
+                                boxShadow="0 20px 27px 0 rgb(0 0 0 / 5%)"
+                            >
 
-
-
-                            <FormControl>
-                                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                                <FormControl>
+                                    <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                                     Wallet Address
                                 </FormLabel>
                                 <Input

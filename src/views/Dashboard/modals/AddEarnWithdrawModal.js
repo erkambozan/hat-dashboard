@@ -35,7 +35,7 @@ export default function AddModal(props) {
     const CreateEarnWithdrawType = () => {
         if (withdraw_address === "") {
             NotificationManager.error("Please fill in the blanks.");
-        }else if(withdraw_amount <= 50){
+        }else if(props.earnAmount  <= 50){
             NotificationManager.error("Withdraw amount should be bigger than 50 USD.");
         }
 

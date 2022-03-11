@@ -28,6 +28,10 @@ class UserApi {
         return axios.get(`${base}/referenceCount`, this.getToken());
     };
 
+    static DeleteWithdrawById = (id) => {
+        return axios.delete(`${base}/withdraw/${id}`, this.getToken())
+    }
+
     static getToken = () => {
         return {
             headers: {

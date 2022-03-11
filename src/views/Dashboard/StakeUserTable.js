@@ -4,47 +4,15 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import StakeApi from "api/stake";
-import Table from "./modals/UserTable";
+import Table from "./modals/UserTableWithDelete";
 
 import { useState } from "react";
 import { useEffect } from "react";
+import {stakeUserColumn} from "./Columns";
 
 function StakeUserTable() {
 
-    const [columns, setColumns] = useState([
-        {
-            label: 'Started Stake Amount',
-            field: 'started_stake_amount',
-            width: 150,
-        },
-        {
-            label: 'Expiry Stake Amount',
-            field: 'expiry_stake_amount',
-            width: 270,
-        },
-        {
-            label: 'Expiry Stake Day ',
-            field: 'expiry_stake_time',
-            width: 200,
-        },
-        {
-            label: 'Stake Percentage',
-            field: 'stake_percentage',
-            width: 100,
-        },
-        {
-            label: 'Start date',
-            field: 'start_date',
-            sort: 'disabled',
-            width: 150,
-        },
-        {
-            label: 'End Date',
-            field: 'end_date',
-            sort: 'disabled',
-            width: 100,
-        },
-    ])
+    const columns = stakeUserColumn
 
   const [data, setData] = useState([{
       started_stake_amount: "",

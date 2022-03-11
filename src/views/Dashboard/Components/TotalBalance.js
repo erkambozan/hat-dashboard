@@ -54,9 +54,11 @@ export default function TotalBalance() {
                                 </StatNumber>
                             </Flex>
                         </Stat>
-                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                        </IconBox>
+                        <Button as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <a href="/helt/user/withdraw">
+                                <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                            </a>
+                        </Button>
                     </Flex>
                 </CardBody>
             </Card>
@@ -78,9 +80,11 @@ export default function TotalBalance() {
                                 </StatNumber>
                             </Flex>
                         </Stat>
-                        <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                            <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
-                        </IconBox>
+                        <Button as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+                            <a href="/helt/user/stake-tables">
+                                <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside}/>
+                            </a>
+                        </Button>
                     </Flex>
                 </CardBody>
             </Card>

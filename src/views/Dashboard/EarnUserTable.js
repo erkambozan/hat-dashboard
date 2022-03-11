@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 import EarnApi from "api/earns";
-import Table from "./modals/UserTable"
+import Table from "./modals/UserTableWithDelete"
 
 import {useState} from "react";
 import {useEffect} from "react";
@@ -18,6 +18,7 @@ import MoveEarnToWithdrawModal from "./modals/MoveEarnToWithdrawModal";
 import AddEarnWithdrawModal from "./modals/AddEarnWithdrawModal";
 import TotalBalance from "./Components/TotalBalance";
 import {NotificationManager} from "react-notifications";
+import {earnUserColumn} from "./Columns";
 
 function EarnUserTable() {
 
@@ -25,35 +26,7 @@ function EarnUserTable() {
     const iconBoxInside = useColorModeValue("white", "white");
     const textColor = useColorModeValue("gray.700", "white");
 
-    const columns = [
-        {
-            label: 'Withdraw Address',
-            field: 'withdraw_address',
-            width: 150,
-        },
-        {
-            label: 'Withdraw Amount USD',
-            field: 'withdraw_amount',
-            width: 270,
-        },
-        {
-            label: 'Coin Type',
-            field: 'coin_type',
-            sort: 'disabled',
-            width: 100,
-        },
-        {
-            label: 'Coin Price',
-            field: 'coin_price',
-            sort: 'disabled',
-            width: 100,
-        },
-        {
-            label: 'Status ',
-            field: 'status',
-            width: 100,
-        },
-    ]
+    const columns = earnUserColumn
 
     function deleteEarnWithdraw(id) {
         EarnApi.DeleteEarnById(id)
@@ -178,7 +151,7 @@ function EarnUserTable() {
                     </CardBody>
                     <Flex justifyContent="flex-end" paddingTop="5%" paddingRight="5%">
                         <Button w="120px" bg={iconTeal} onClick={() => setModalShow(true)}>
-                            Withdraw
+                            Withdraw USD
                         </Button>
                         <AddEarnWithdrawModal earnAmount={multiplyAmount} show={modalShow}
                                               onHide={() => setModalShow(false)}/>
@@ -187,7 +160,7 @@ function EarnUserTable() {
             </Flex>
 
             <Flex direction="column" pt={{base: "24px"}}>
-                <Table data={data} dataColumns={columns} deleteEarnWithdraw={deleteEarnWithdraw}/>
+                <Table data={data} dataColumns={columns} deleteFunction={deleteEarnWithdraw}/>
             </Flex>
         </Flex>
     );

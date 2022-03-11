@@ -2,6 +2,9 @@ import axios from "axios";
 
 let baseUrl = "/hat/admin";
 class AdminStakeApi {
+  static GetAllUsers = () =>{
+    return axios.get(`${baseUrl}/users`,this.getToken())
+  }
   static GetAllWithdraw = ()=>{
     return axios.get(`${baseUrl}/withdraw`,this.getToken())
   }

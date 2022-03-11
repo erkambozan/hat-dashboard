@@ -10,7 +10,8 @@ import EditEarnModal from "./EditEarnModal";
 export default function WithSortingComponent(props) {
   const {data, dataColumns, deleteEarnWithdraw} = props;
   const [modalShow, setModalShow] = useState(false);
-  
+  const [selectedRow, setSelectedRow] = useState({});
+
   const [datatable, setDatatable] = React.useState({
     columns: [
         ...dataColumns
@@ -35,15 +36,18 @@ export default function WithSortingComponent(props) {
               <Button bg="red" marginRight="10px" onClick={() => deleteEarnWithdraw(row.id)}>
                 <Text> x </Text>
               </Button>
-              <Button onClick={() => setModalShow(true)}>
+              <Button onClick={() => {
+                setSelectedRow(row)
+                setModalShow(true)
+              }}>
                 <Text>Edit</Text>
               </Button>
-              <EditEarnModal withdrawAddress={row.withdraw_address}
-                         withdrawAmount={row.withdraw_amount}
-                         coinType={row.coin_type}
-                         coinPrice={row.coin_price}
-                         status={row.status}
-                         id={row.id}
+              <EditEarnModal withdrawAddress={selectedRow.withdraw_address}
+                         withdrawAmount={selectedRow.withdraw_amount}
+                         coinType={selectedRow.coin_type}
+                         coinPrice={selectedRow.coin_price}
+                         status={selectedRow.status}
+                         id={selectedRow.id}
                          show={modalShow} onHide={() => setModalShow(false)}/>
             </Flex>
         ),

@@ -1,26 +1,27 @@
 import UserApi from "../../api/user";
 import React, {useEffect, useState} from "react";
-import TransactionRow from "../../components/Tables/TransactionRow";
-import {FaArrowDown, FaArrowUp} from "react-icons/fa";
+import Table from "./modals/AdminUsersTable"
+import {transactionsColumn} from "./Columns";
+import useMountEffect from "@restart/hooks/cjs/useMountEffect";
+
 
 export default function Transactions(props) {
-    const [transactions, setTransactions] = useState([])
+    const [transactions, setTransactions] = useState([
+        {
+            title: "",
+            date: "",
+            amount: ""
+        }
+    ])
+    const columns = transactionsColumn
 
-    useEffect(() => {
+    useMountEffect(() => {
             UserApi.GetTransactions(props.id).then(res => {
                 setTransactions(res.data)
             })
-        }
-    )
+        });
 
-    return transactions.map((transaction) => {
-        return (
-            <TransactionRow
-                name={transaction.title}
-                logo={transaction.amount >= 0 ? FaArrowUp : FaArrowDown}
-                date={transaction.date}
-                price={transaction.amount}
-            />
-        );
-    })
+    return (
+        <Table data={transactions} dataColumns={columns}/>
+    );
 }

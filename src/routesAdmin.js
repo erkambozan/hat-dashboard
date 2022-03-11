@@ -16,13 +16,13 @@ import {
     StatsIcon,
     CreditIcon,
     PersonIcon,
-    DocumentIcon,
     RocketIcon,
-    SupportIcon,
 } from "components/Icons/Icons";
 import {SlackLogo} from "./components/Icons/Icons";
 import UserWithdrawal from "./views/Dashboard/UserWithdrawal";
 import AdminEarnTable from "./views/Dashboard/AdminEarnTable";
+import AdminUsers from "./views/Dashboard/AdminUsersTable";
+import UserWithdrawalTable from "./views/Dashboard/UserWithdrawal";
 
 var dashRoutes = [
     {
@@ -78,7 +78,7 @@ var dashRoutes = [
         name: "Withdraw",
         rtlName: "لوحة القيادة",
         icon: <CreditIcon color="inherit" />,
-        component: UserWithdrawal,
+        component: UserWithdrawalTable,
         layout: "/user",
     },
             {
@@ -112,6 +112,14 @@ var dashRoutes = [
         rtlName: "لوحة القيادة",
         icon: <SlackLogo color="inherit" />,
         component: AdminEarnTable,
+        layout: "/user",
+    },
+    {
+        path: "/admin-user-table",
+        name: "Admin User Table",
+        rtlName: "لوحة القيادة",
+        icon: <SlackLogo color="inherit" />,
+        component: AdminUsers,
         layout: "/user",
     },
 

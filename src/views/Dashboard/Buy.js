@@ -341,6 +341,8 @@ export default function Buy() {
                 }}>
                     <Text fontSize="2xl">BUY</Text>
                 </Button>
+
+                <Text fontSize="xs">20 USD Fee</Text>
             </Card>
         </Flex>
     );

@@ -30,8 +30,8 @@ var dashRoutes = [
         layout: "/user",
     },
     {
-        path: "/balance",
-        name: "Balance",
+        path: "/buy",
+        name: "Buy",
         rtlName: "لوحة القيادة",
         icon: <HomeIcon color="inherit" />,
         component: Buy,
