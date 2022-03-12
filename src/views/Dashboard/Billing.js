@@ -45,6 +45,15 @@ function Billing() {
         locked_balance: 0.0,
         earn_balance: 0.0
     });
+
+    const [transactions, setTransactions] = useState([
+        {
+            title: "",
+            date: "",
+            amount: ""
+        }
+    ])
+
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -56,6 +65,10 @@ function Billing() {
             setUser(res.data)
             return res.data.id
         }).catch(err => console.log("err:", err))
+
+        UserApi.GetTransactions().then(res => {
+            setTransactions(res.data)
+        })
     }, []);
 
     return (
@@ -237,7 +250,7 @@ function Billing() {
                         </CardHeader>
                         <CardBody>
                             <Flex direction="column" w="100%">
-                                <Transactions id={user.id}/>
+                                <Transactions transactions={transactions}/>
                             </Flex>
                         </CardBody>
                     </Card>

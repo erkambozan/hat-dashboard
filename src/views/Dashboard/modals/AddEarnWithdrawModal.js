@@ -45,8 +45,9 @@ export default function AddModal(props) {
             coin_type: coin_type,
             coin_price: coin_price,
         })
-            .then(res => {
+            .then(() => {
                 props.onHide();
+                props.onHideLtc();
                 NotificationManager.success("Successfully created.");
             })
     }

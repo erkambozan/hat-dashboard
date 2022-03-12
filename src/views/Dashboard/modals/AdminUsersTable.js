@@ -1,15 +1,8 @@
-import React, {useState} from 'react';
-import { MDBDataTableV5, MDBCloseIcon } from 'mdbreact';
-import {
-    Flex,
-    Button,
-    Text,
-} from "@chakra-ui/react";
-import EditEarnModal from "./EditEarnModal";
+import React from 'react';
+import { MDBDataTableV5 } from 'mdbreact';
 
 export default function WithSortingComponent(props) {
-    const {data, dataColumns, deleteEarnWithdraw} = props;
-    const [modalShow, setModalShow] = useState(false);
+    const {data, dataColumns} = props;
 
     const [datatable, setDatatable] = React.useState({
         columns: [

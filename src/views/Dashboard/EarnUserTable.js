@@ -19,6 +19,7 @@ import AddEarnWithdrawModal from "./modals/AddEarnWithdrawModal";
 import TotalBalance from "./Components/TotalBalance";
 import {NotificationManager} from "react-notifications";
 import {earnUserColumn} from "./Columns";
+import LtcWarningModal from "./modals/LtcWarningModal";
 
 function EarnUserTable() {
 
@@ -153,8 +154,7 @@ function EarnUserTable() {
                         <Button w="120px" bg={iconTeal} onClick={() => setModalShow(true)}>
                             Withdraw USD
                         </Button>
-                        <AddEarnWithdrawModal earnAmount={multiplyAmount} show={modalShow}
-                                              onHide={() => setModalShow(false)}/>
+                        <LtcWarningModal earnAmount={multiplyAmount} ltcWarningShow={modalShow} show={modalShow} onHide={() => setModalShow(false)}/>
                     </Flex>
                 </Card>
             </Flex>
