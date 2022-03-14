@@ -16,30 +16,40 @@ import UserApi from 'api/user';
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import {Text} from "@chakra-ui/layout";
+import VerificationModal from "./VerificationModal";
+import CardHeader from "../../../components/Card/CardHeader";
 
 export default function AddModalWithdraw(props) {
 
     const bgColor = useColorModeValue("white", "gray.700");
     const [walletAddress, setWalletAddress] = useState("");
     const [withdrawAmount, setWithdrawAmount] = useState(0);
-    const [buttonText, setButtonText] = useState("Withdraw");
+    const [buttonText, setButtonText] = useState("Withdraw HELT");
+
+    const [verificationModalShow, setVerificationModalShow] = useState(false);
+
     const [error, setError] = useState(undefined);
 
     const CreateWithdraw = () => {
         if (walletAddress == "" || withdrawAmount == 0) {
-            NotificationManager.warning("Please fill in all required fields.")
+            return NotificationManager.error("Please fill in all required fields.")
         }else if (withdrawAmount < 20000){
-            NotificationManager.error("Withdraw amount cannot less than 20.000 HELT")
+            return NotificationManager.error("Withdraw amount cannot less than 20.000 HELT")
         }
-        else {
-            UserApi.CreateWithdraw({
-                wallet_address: walletAddress,
-                withdraw_amount: withdrawAmount,
-            })
-            NotificationManager.success("Successfully created withdraw.")
-            props.onHide();
+        setVerificationModalShow(true)
+    }
 
-        }
+    const VerifyFunction = () => {
+        UserApi.CreateWithdraw({
+            wallet_address: props.walletAddress,
+            withdraw_amount: props.withdrawAmount,
+        }).then(() => {
+            props.onHide();
+            NotificationManager.success("Successfully");
+        }).catch(() => {
+            NotificationManager.error("Withdraw didn't accept something went wrong !");
+            props.onHide();
+        })
     }
 
     return (
@@ -142,6 +152,7 @@ export default function AddModalWithdraw(props) {
                                     >
                                         {buttonText}
                                     </Button>
+                                    <VerificationModal verifyFunction={VerifyFunction} show={verificationModalShow} onHide={() => setVerificationModalShow(false)}/>
                                 </FormControl>
 
                             </Flex>

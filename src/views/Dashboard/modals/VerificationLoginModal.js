@@ -1,62 +1,77 @@
 import {Modal} from 'react-bootstrap';
-import {
-    Box,
-    Flex,
-    FormControl,
-    FormLabel,
-    Button,
-    Input,
-
-    useColorModeValue,
-} from "@chakra-ui/react";
-import React, {useEffect, useState} from "react";
-import EarnApi from 'api/earns';
-
+import {Button, Flex, FormControl, FormLabel, Input, useColorModeValue,} from "@chakra-ui/react";
+import React, {useState} from "react";
 //Notification
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import VerificationModal from "./VerificationModal";
+import EmailApi from "../../../api/email";
+import AuthApi from "../../../api/auth";
 
-export default function AddModal(props) {
-
-    const titleColor = useColorModeValue("teal.300", "teal.200");
-    const textColor = useColorModeValue("gray.700", "white");
+export default function VerificationLoginModal(props) {
     const bgColor = useColorModeValue("white", "gray.700");
-    const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
-    const [withdraw_address, setWithdrawAddress] = useState("");
-    const [withdraw_amount, setWithdrawAmount] = useState(0);
-    const [coin_type, setCoinType] = useState("LTC");
-    const [coin_price, setCoinPrice] = useState(1);
-    const [verificationModalShow, setVerificationModalShow] = useState(false);
+    const [verificationCode, setVerificationCode] = useState(0);
 
 
-    const [buttonText, setButtonText] = useState("Create Earn Withdraw");
+    const [buttonText, setButtonText] = useState("Verify");
     const [error, setError] = useState(undefined);
 
-    const CreateEarnWithdrawType = () => {
-        if (withdraw_address === "") {
-            NotificationManager.error("Please fill in the blanks.");
-        }else if(props.earnAmount  <= 50){
-            NotificationManager.error("Withdraw amount should be bigger than 50 USD.");
+    const Verify = () => {
+        if (verificationCode.length < 6) {
+            NotificationManager.error("Wrong Verification Code");
         }
 
-       setVerificationModalShow(true)
+        AuthApi.Login({
+            "username": props.email,
+            "password": props.password,
+        }).then(response => {
+
+            if (response.data && response.data.success === false) {
+                setButtonText("Sign in");
+                return setError(response.data.msg);
+            }
+            EmailApi.VerifyCodeNotLogged({
+                email: props.email,
+                verification_code: verificationCode
+            })
+                .then(() => {
+                    NotificationManager.success("Successfully");
+                    SetProfile(response)
+                    props.onHide()
+                }).catch(() => {
+                NotificationManager.error("Verification Code problem !")
+            })
+
+        }).catch((err) => {
+            setButtonText("Sign in");
+            if (err.response) {
+                NotificationManager.error("Your password or email is incorrect. Plaese try again.");
+                return setError(err.response.data.msg);
+            }
+            return setError("There has been an error.");
+        })
     }
 
-    const VerifyFunction = () => {
-        EarnApi.CreateEarnWithdraw({
-            withdraw_address: withdraw_address,
-            withdraw_amount: props.earnAmount,
-            coin_type: coin_type,
-            coin_price: coin_price,
+
+    const SetProfile = (response) => {
+        let user = {...response.data.user};
+        user.token = response.data.token;
+        user = JSON.stringify(user);
+        props.setUser(user);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", user);
+        return history.push("/dashboard");
+    };
+
+    const SendCode = () => {
+        EmailApi.SendCodeNotLogged({
+            email: props.email,
+            verification_code: ""
+        }).then(() => {
+            NotificationManager.success("Verification Code sent to email ...");
         })
-            .then(() => {
-                props.onHide();
-                props.onHideLtc();
-                NotificationManager.success("Successfully created.");
-            })
     }
+
     return (
         <>
             <Modal
@@ -90,49 +105,21 @@ export default function AddModal(props) {
 
                                 <FormControl>
                                     <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-                                        Withdraw Address LTC
-                                    </FormLabel>
-                                    <Input
-                                        fontSize="sm"
-                                        ms="4px"
-                                        borderRadius="15px"
-                                        type="text"
-                                        placeholder="Withdraw address LTC"
-                                        mb="24px"
-                                        size="lg"
-                                        onChange={(event) => {
-                                            setWithdrawAddress(event.target.value);
-                                            setError(undefined);
-                                        }}
-                                    />
-                                    <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-                                        Withdraw Amount USD
+                                        Verification Code
                                     </FormLabel>
                                     <Input
                                         fontSize="sm"
                                         ms="4px"
                                         borderRadius="15px"
                                         type="number"
-                                        placeholder="Withdraw Amount"
+                                        placeholder="Verification Code"
                                         mb="24px"
                                         size="lg"
-                                        value={props.earnAmount}
+                                        onChange={(event) => {
+                                            setVerificationCode(event.target.value);
+                                            setError(undefined);
+                                        }}
                                     />
-                                    <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-                                        Coin Type
-                                    </FormLabel>
-                                    <Input
-                                        fontSize="sm"
-                                        ms="4px"
-                                        borderRadius="15px"
-                                        type="text"
-                                        placeholder="Coin Type"
-                                        mb="24px"
-                                        size="lg"
-                                        value={coin_type}
-                                    />
-
-
                                     <h4
                                         style={{
                                             fontSize: ".9em",
@@ -161,13 +148,13 @@ export default function AddModal(props) {
                                             bg: "teal.400",
                                         }}
                                         onClick={() => {
-                                            CreateEarnWithdrawType();
+                                            Verify();
                                         }}
 
                                     >
                                         {buttonText}
                                     </Button>
-                                    <VerificationModal walletAddress={walletAddress} withdrawAmount={withdrawAmount} verifyFunction={VerifyFunction} show={verificationModalShow} onHide={() => setVerificationModalShow(false)}/>
+                                    <Button onClick={SendCode}> Send Code </Button>
                                 </FormControl>
 
                             </Flex>

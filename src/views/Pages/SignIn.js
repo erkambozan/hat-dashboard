@@ -25,6 +25,9 @@ import { useAuth } from "../../auth-context/auth.context";
 import AuthApi from "../../api/auth";
 
 import { useHistory } from "react-router-dom";
+import VerificationLoginModal from "../Dashboard/modals/VerificationLoginModal";
+import VerificationModal from "../Dashboard/modals/VerificationModal";
+import VerificationEmailModal from "../Dashboard/modals/VerificationEmailModal";
 
 function SignIn() {
     // Chakra color mode
@@ -38,6 +41,9 @@ function SignIn() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(undefined);
     const [buttonText, setButtonText] = useState("Sign in");
+
+    const [verificationModalShow, setVerificationModalShow] = useState(false);
+    const [verificationEmailModalShow, setVerificationEmailModalShow] = useState(false);
 
     const login = async (event) => {
         if (event) {
@@ -53,35 +59,7 @@ function SignIn() {
             return setError("You must enter your password");
         }
         setButtonText("Signing in");
-        try {
-            let response = await AuthApi.Login({
-                "username": email,
-                "password": password,
-            });
-            if (response.data && response.data.success === false) {
-                setButtonText("Sign in");
-                return setError( response.data.msg);
-            }
-            return setProfile(response);
-        } catch (err) {
-            console.log(err);
-            setButtonText("Sign in");
-            if (err.response) {
-                NotificationManager.error("Your password or email is incorrect. Plaese try again.");
-                return setError(err.response.data.msg);
-            }
-            return setError("There has been an error.");
-        }
-    };
-
-    const setProfile = async (response) => {
-        let user = { ...response.data.user };
-        user.token = response.data.token;
-        user = JSON.stringify(user);
-        setUser(user);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", user);
-        return history.push("/dashboard");
+        setVerificationModalShow(true)
     };
 
     return (
@@ -220,6 +198,9 @@ function SignIn() {
                                 >
                                     {buttonText}
                                 </Button>
+                                <VerificationLoginModal setUser={setUser} email={email} password={password} show={verificationModalShow} onHide={() => setVerificationModalShow(false)}/>
+                                <Button onClick={() => {setVerificationEmailModalShow(true)}}>Verify Email</Button>
+                                <VerificationEmailModal email={email} password={password} show={verificationEmailModalShow} onHide={() => setVerificationEmailModalShow(false)}/>
                                 <NotificationContainer />
                             </FormControl>
                             <Flex
