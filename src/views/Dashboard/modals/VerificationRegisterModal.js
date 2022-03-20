@@ -1,6 +1,5 @@
 import {Modal} from 'react-bootstrap';
 import {
-    Box,
     Flex,
     FormControl,
     FormLabel,
@@ -10,12 +9,10 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import React, {useState} from "react";
-import AdminStakeApi from 'api/adminstake';
 
 //Notification
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import UserApi from "../../../api/user";
 import EmailApi from "../../../api/email";
 
 export default function VerificationModal(props) {
@@ -27,8 +24,8 @@ export default function VerificationModal(props) {
     const [buttonText, setButtonText] = useState("Verify");
     const [error, setError] = useState(undefined);
 
-    const Verify = () => {
-        if (verificationCode.length < 6) {
+    const Verify = async () => {
+        if (verificationCode.length < 5) {
             NotificationManager.error("Wrong Verification Code");
         }
         EmailApi.VerifyCodeNotLogged({
@@ -36,8 +33,12 @@ export default function VerificationModal(props) {
             verification_code: verificationCode
         })
             .then(() => {
-                props.verifyFunction();
+                NotificationManager.success("Verification Code Succeed")
                 props.onHide();
+
+                setTimeout(function () {
+                props.history.push("/auth/signin")
+                }, 3000);
             }).catch(() => {
             NotificationManager.error("Verification Code problem !")
         })
@@ -45,7 +46,8 @@ export default function VerificationModal(props) {
 
     const SendCode = () => {
         EmailApi.SendCodeNotLogged({
-
+            email: props.email,
+            verification_code: verificationCode
         }).then(() => {
             NotificationManager.success("Verification Code sent to email ...");
         })

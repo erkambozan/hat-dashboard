@@ -28,7 +28,7 @@ export default function VerificationModal(props) {
     const [error, setError] = useState(undefined);
 
     const CreateWithdraw = () => {
-        if (verificationCode.length < 6) {
+        if (verificationCode.length < 5) {
             NotificationManager.error("Wrong Verification Code");
         }
         EmailApi.VerifyCode({

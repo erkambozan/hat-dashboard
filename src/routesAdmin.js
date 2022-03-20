@@ -11,18 +11,11 @@ import AdminStake from "views/Dashboard/AdminStake.js";
 import AdminStakeSettings from "views/Dashboard/AdminStakeSettings.js";
 import AdminWithdrawal from "views/Dashboard/AdminWithdrawal.js";
 
-import {
-    HomeIcon,
-    StatsIcon,
-    CreditIcon,
-    PersonIcon,
-    RocketIcon,
-} from "components/Icons/Icons";
+import {CreditIcon, HomeIcon, PersonIcon, RocketIcon, StatsIcon,} from "components/Icons/Icons";
 import {SlackLogo} from "./components/Icons/Icons";
-import UserWithdrawal from "./views/Dashboard/UserWithdrawal";
+import UserWithdrawalTable from "./views/Dashboard/UserWithdrawal";
 import AdminEarnTable from "./views/Dashboard/AdminEarnTable";
 import AdminUsers from "./views/Dashboard/AdminUsersTable";
-import UserWithdrawalTable from "./views/Dashboard/UserWithdrawal";
 
 var dashRoutes = [
     {

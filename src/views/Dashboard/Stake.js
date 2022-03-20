@@ -68,16 +68,16 @@ class PrintStakes extends React.Component {
                                             <td> {item.stake_percentage}</td>
                                         </tr>
                                         <tr>
-                                            <td> Expiry Stake Time</td>
+                                            <td> Expiry Stake Day</td>
                                             <td> {item.expiry_stake_time}</td>
                                         </tr>
                                         <tr>
                                             <td> Minimum Limit</td>
-                                            <td> {item.minimum_limit} HAT</td>
+                                            <td> {item.minimum_limit} HELT</td>
                                         </tr>
                                         <tr>
                                             <td> Maximum Limit</td>
-                                            <td> {item.maximum_limit} HAT</td>
+                                            <td> {item.maximum_limit} HELT</td>
                                         </tr>
                                         <tr>
                                             <td>

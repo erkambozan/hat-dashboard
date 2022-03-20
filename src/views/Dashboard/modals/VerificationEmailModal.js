@@ -30,7 +30,7 @@ export default function VerificationLoginModal(props) {
     const [error, setError] = useState(undefined);
 
     const Verify = () => {
-        if (verificationCode.length < 6) {
+        if (verificationCode.length < 5) {
             NotificationManager.error("Wrong Verification Code");
         }
 

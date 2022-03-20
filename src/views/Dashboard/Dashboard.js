@@ -44,8 +44,6 @@ import TimelineRow from "components/Tables/TimelineRow";
 import React, {useEffect, useState} from "react";
 // react icons
 import { BsArrowRight } from "react-icons/bs";
-import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
-import { dashboardTableData, timelineData } from "variables/general";
 import UserApi from "../../api/user";
 import Config from "../../config";
 
@@ -62,7 +60,7 @@ export default function Dashboard() {
 
 
   function copyToClipboard(){
-    const link = `http://${Config.dashboardPath}/helt/auth/signup?reference=${user.reference_id}`;
+    const link = `http://${Config.dashboardPath}/helt/auth/signup?reference=${user.id}`;
     navigator.clipboard.writeText(link)
   }
   return (

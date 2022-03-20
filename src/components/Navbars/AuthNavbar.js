@@ -36,9 +36,10 @@ export default function AuthNavbar(props) {
   let routes
   if (user && user.token){
     routes = routesUser
-  }else {
-    routes = routesLogin
   }
+
+    routes = routesLogin
+
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return window.location.href.indexOf(routeName) > -1 ? true : false;

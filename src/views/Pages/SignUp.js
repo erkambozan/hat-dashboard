@@ -22,7 +22,7 @@ import React, {useState} from "react";
 
 import AuthApi from "../../api/auth";
 import {useHistory, useLocation} from "react-router-dom";
-import VerificationModal from "../Dashboard/modals/VerificationModal";
+import VerificationRegisterModal from "../Dashboard/modals/VerificationRegisterModal";
 
 function SignUp() {
     const history = useHistory();
@@ -52,8 +52,7 @@ function SignUp() {
         if (emailRegex.test(email)) {
             setMessage("Email is Valid");
             if (passRegex.test(password)) {
-                NotificationManager.success("Your account has been successfully created");
-                return handleSubmit();
+                await handleSubmit()
             } else {
                 NotificationManager.warning("Password is not valid. Password must contain at least one uppercase letter, one lowercase letter, one special character and number. Should not be less than 8");
             }
@@ -80,8 +79,6 @@ function SignUp() {
         if (email === "") {
             return NotificationManager.warning("You must enter a email.");
         }
-
-        setVerificationModalShow(true)
     }
 
     const handleSubmit = async () => {
@@ -97,13 +94,12 @@ function SignUp() {
                 setButtonText("Sign up");
                 return setError(response.data.msg);
             }
-            return history.push("/auth/signin");
+            NotificationManager.warning("Verify Your Mail");
+            setVerificationModalShow(true)
         }).catch(err => {
             console.log(err);
             setButtonText("Sign up");
-            if (err.response) {
-                return setError(err.response.data.msg);
-            }
+            NotificationManager.error("Already Exist");
             return setError("There has been an error.");
         })
     }
@@ -288,7 +284,9 @@ function SignUp() {
                             {buttonText}
                         </Button>
                         <NotificationContainer/>
-                        <VerificationRegisterModal email={email} verifyFunction={handleSubmit} show={verificationModalShow} onHide={() => setVerificationModalShow(false)}/>
+                        <VerificationRegisterModal email={email} verifyFunction={handleSubmit} history={history}
+                                                   show={verificationModalShow}
+                                                   onHide={() => setVerificationModalShow(false)}/>
                     </FormControl>
                     <Flex
                         flexDirection="column"

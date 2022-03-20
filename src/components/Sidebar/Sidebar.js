@@ -237,7 +237,7 @@ function Sidebar(props) {
 
   // SIDEBAR
   return (
-    <Box ref={mainPanel}>
+    <Box ref={mainPanel} style={{overflow:scroll}}>
       <Box display={{ sm: "none", xl: "block" }} position="fixed">
         <Box
           bg={sidebarBg}
@@ -255,12 +255,13 @@ function Sidebar(props) {
           pe="20px"
           m={sidebarMargins}
           borderRadius={sidebarRadius}
+          overflowY="scroll"
         >
           <Box>{brand}</Box>
           <Stack direction="column" mb="40px">
             <Box>{links}</Box>
           </Stack>
-          <SidebarHelp></SidebarHelp>
+          <SidebarHelp/>
         </Box>
       </Box>
     </Box>

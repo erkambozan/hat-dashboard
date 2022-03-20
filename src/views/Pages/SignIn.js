@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 // Chakra imports
 import {
     Box,
@@ -19,23 +19,24 @@ import signInImage from "assets/img/signin-background.jpg";
 
 //Notification
 import 'react-notifications/lib/notifications.css';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-import { useAuth } from "../../auth-context/auth.context";
+import {useAuth} from "../../auth-context/auth.context";
 import AuthApi from "../../api/auth";
 
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import VerificationLoginModal from "../Dashboard/modals/VerificationLoginModal";
 import VerificationModal from "../Dashboard/modals/VerificationModal";
 import VerificationEmailModal from "../Dashboard/modals/VerificationEmailModal";
+import EmailApi from "../../api/email";
 
 function SignIn() {
     // Chakra color mode
     const titleColor = useColorModeValue("teal.300", "teal.200");
     const textColor = useColorModeValue("gray.400", "white");
     const history = useHistory();
-    const { setUser } = useAuth();
-    const { user } = useAuth();
+    const {setUser} = useAuth();
+    const {user} = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -59,32 +60,52 @@ function SignIn() {
             return setError("You must enter your password");
         }
         setButtonText("Signing in");
-        setVerificationModalShow(true)
+
+        AuthApi.Login({
+            "username": email,
+            "password": password,
+        }).then(response => {
+
+            if (response.data && response.data.success === false) {
+                setButtonText("Sign in");
+                return setError(response.data.msg);
+            }
+
+            setVerificationModalShow(true)
+
+        }).catch((err) => {
+            setButtonText("Sign in");
+            if (err.response) {
+                NotificationManager.error("Your password or email is incorrect. Plaese try again.");
+                return setError(err.response.data.msg);
+            }
+            return setError("There has been an error.");
+        })
     };
 
     return (
         <Flex position="relative" mb="40px">
             <Flex
-                h={{ sm: "initial", md: "75vh", lg: "85vh" }}
+                h={{sm: "initial", md: "75vh", lg: "85vh"}}
                 w="100%"
                 maxW="1044px"
                 mx="auto"
                 justifyContent="space-between"
                 mb="30px"
-                pt={{ sm: "100px", md: "0px" }}
+                pt={{sm: "100px", md: "0px"}}
             >
                 <Flex
                     alignItems="center"
                     justifyContent="start"
-                    style={{ userSelect: "none" }}
-                    w={{ base: "100%", md: "50%", lg: "42%" }}
+                    style={{userSelect: "none"}}
+                    w={{base: "100%", md: "50%", lg: "42%"}}
                 >
                     {user && user.token ?
                         <div>
                             <Heading color={titleColor} fontSize="32px" mt="10px" mb="10px">
                                 Welcome Back
                             </Heading>
-                            <h3 style={{ textAlign: "center" }}>You are already signed in.</h3>
+                            <h3 style={{textAlign: "center"}}>You are already signed in.</h3>
                             <Button
                                 fontSize="15px"
                                 type="submit"
@@ -110,7 +131,7 @@ function SignIn() {
                             w="100%"
                             background="transparent"
                             p="48px"
-                            mt={{ md: "150px", lg: "80px" }}
+                            mt={{md: "150px", lg: "80px"}}
                         >
                             <Heading color={titleColor} fontSize="32px" mt="10px" mb="10px">
                                 Welcome Back
@@ -158,7 +179,7 @@ function SignIn() {
                                     }}
                                 />
                                 <FormControl display="flex" alignItems="center">
-                                    <Switch id="remember-login" colorScheme="teal" me="10px" />
+                                    <Switch id="remember-login" colorScheme="teal" me="10px"/>
                                     <FormLabel
                                         htmlFor="remember-login"
                                         mb="1"
@@ -198,10 +219,16 @@ function SignIn() {
                                 >
                                     {buttonText}
                                 </Button>
-                                <VerificationLoginModal setUser={setUser} email={email} password={password} show={verificationModalShow} onHide={() => setVerificationModalShow(false)}/>
-                                <Button onClick={() => {setVerificationEmailModalShow(true)}}>Verify Email</Button>
-                                <VerificationEmailModal email={email} password={password} show={verificationEmailModalShow} onHide={() => setVerificationEmailModalShow(false)}/>
-                                <NotificationContainer />
+                                <VerificationLoginModal setUser={setUser} email={email} password={password}
+                                                        show={verificationModalShow}
+                                                        onHide={() => setVerificationModalShow(false)}/>
+                                <Button onClick={() => {
+                                    setVerificationEmailModalShow(true)
+                                }}>Verify Email</Button>
+                                <VerificationEmailModal email={email} password={password}
+                                                        show={verificationEmailModalShow}
+                                                        onHide={() => setVerificationEmailModalShow(false)}/>
+                                <NotificationContainer/>
                             </FormControl>
                             <Flex
                                 flexDirection="column"
@@ -215,7 +242,7 @@ function SignIn() {
                     }
                 </Flex>
                 <Box
-                    display={{ base: "none", md: "block" }}
+                    display={{base: "none", md: "block"}}
                     overflowX="hidden"
                     h="100%"
                     w="40vw"
